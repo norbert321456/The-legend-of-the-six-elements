@@ -1,0 +1,39 @@
+{
+  "name": "legend-of-the-six-elements",
+  "productName": "Legend of the Six Elements",
+  "version": "1.0.0",
+  "description": "Hat elem. Hat birodalom. Egyetlen legenda.",
+  "main": "main.js",
+  "author": "Legend of the Six Elements",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "31.3.0",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "hu.legendofthesixelements.game",
+    "productName": "Legend of the Six Elements",
+    "files": [
+      "main.js",
+      "game.html",
+      "icon.ico"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Legend of the Six Elements",
+      "artifactName": "Legend-of-the-Six-Elements-Setup-${version}.exe"
+    }
+  }
+}
