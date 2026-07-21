@@ -1,0 +1,8 @@
+{
+  "name": "legend-relay",
+  "version": "1.0.0",
+  "description": "Legend of the Six Elements - online relay szerver",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
