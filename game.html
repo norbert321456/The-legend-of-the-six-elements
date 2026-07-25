@@ -650,6 +650,204 @@ body.targeting #board .card.selectable{animation:targetGlow 1.1s ease-in-out inf
   z-index:15;opacity:0;transition:opacity .5s}
 #noira-cine #nc-skip{position:absolute;right:18px;bottom:14px;color:rgba(200,150,255,.5);font-size:11px;letter-spacing:2px;z-index:20;opacity:0;transition:opacity .6s}
 #noira-cine .nc-tear{position:absolute;width:2px;background:linear-gradient(to bottom,rgba(140,0,255,.9),transparent);border-radius:2px;z-index:12;opacity:0}
+
+/* ============================================================
+   ELEMI HARCI EFFEKTEK
+   Minden elem sajat becsapodast, csapasnyomot es varazs-karaktert kap.
+   A .impact / .atk-trail alapszabalyok feljebb vannak – ezek felulirjak.
+============================================================ */
+
+/* ---- kepernyo-szintu elemi villanas ---- */
+.fx-tint{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:0;animation:fxTint .42s ease-out both}
+@keyframes fxTint{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+
+/* ---- kozos: az elemi becsapodasok elrejtik az altalanos kardvagast ---- */
+.impact.im-f .slash,.impact.im-v .slash,.impact.im-e .slash,.impact.im-s .slash{display:none}
+
+/* 🔥 TUZ – robbanas: tuzgomb, lokeshullam, felszallo parazs */
+.impact.im-f .ring{border-color:var(--c2);border-width:5px;filter:blur(1px);animation-duration:.42s}
+.impact.im-f .ring2{border-color:var(--c1);animation-duration:.6s}
+.impact.im-f .shock{background:radial-gradient(circle,#FFF 0%,var(--c3) 25%,var(--c2) 55%,transparent 72%);
+  width:70px;height:70px;margin:-35px 0 0 -35px;animation:shockX .5s ease-out both}
+.im-blast{position:absolute;left:50%;top:50%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.9),var(--c3) 18%,var(--c2) 42%,rgba(120,20,0,.35) 66%,transparent 76%);
+  filter:blur(3px);animation:imBlast .62s cubic-bezier(.2,.7,.3,1) both}
+@keyframes imBlast{0%{transform:scale(.15);opacity:1}70%{opacity:.85}100%{transform:scale(1.5);opacity:0}}
+.im-smoke{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;
+  background:radial-gradient(circle,rgba(60,30,20,.75),rgba(30,15,10,.35) 55%,transparent 72%);
+  filter:blur(7px);animation:imSmoke 1s ease-out both}
+@keyframes imSmoke{0%{transform:scale(.3) translateY(0);opacity:.9}100%{transform:scale(1.8) translateY(-46px);opacity:0}}
+
+/* 💧 VIZ – csobbanas: lapos fodrok, permet */
+.impact.im-v .ring{border-color:var(--c2);border-width:3px;animation:imRipple .72s ease-out both}
+.impact.im-v .ring2{border-color:var(--c3);animation:imRipple .85s .12s ease-out both}
+@keyframes imRipple{0%{transform:scale(.15) scaleY(.34);opacity:1}100%{transform:scale(1.7) scaleY(.34);opacity:0}}
+.impact.im-v .shock{background:radial-gradient(circle,rgba(255,255,255,.95),var(--c1) 45%,transparent 70%)}
+.im-splash{position:absolute;left:50%;top:50%;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;
+  border:3px solid var(--c3);border-bottom-color:transparent;border-left-color:transparent;
+  animation:imSplash .6s ease-out both}
+@keyframes imSplash{0%{transform:scale(.2) rotate(0);opacity:1}100%{transform:scale(1.55) rotate(28deg);opacity:0}}
+
+/* 🪨 FOLD – becsapodas: repedesek, kotorm, por */
+.impact.im-e .ring{border-color:var(--c2);border-width:6px;filter:blur(.5px);animation-duration:.75s}
+.impact.im-e .ring2{display:none}
+.impact.im-e .shock{background:radial-gradient(circle,rgba(215,204,163,.9),rgba(107,142,35,.4) 50%,transparent 72%)}
+.im-crack{position:absolute;left:50%;top:50%;width:120px;height:5px;margin:-2px 0 0 0;border-radius:2px;
+  transform-origin:0 50%;background:linear-gradient(90deg,rgba(40,26,12,.95),rgba(90,70,35,.6),transparent);
+  animation:imCrack .55s cubic-bezier(.15,.9,.3,1) both}
+.im-crack.c2{transform:rotate(128deg)}
+.im-crack.c3{transform:rotate(232deg)}
+@keyframes imCrack{0%{opacity:0;transform:rotate(var(--r,14deg)) scaleX(.1)}25%{opacity:1}100%{opacity:.85;transform:rotate(var(--r,14deg)) scaleX(1)}}
+.im-crack.c2{--r:128deg}
+.im-crack.c3{--r:232deg}
+.im-crack{--r:14deg}
+.im-dust{position:absolute;left:50%;top:50%;width:170px;height:110px;margin:-40px 0 0 -85px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(190,175,130,.6),transparent 68%);filter:blur(6px);
+  animation:imDust .9s ease-out both}
+@keyframes imDust{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+
+/* 🌪 SZEL – vago legorveny: penge-ivek, porgo lokes */
+.impact.im-w{animation:imSpin .6s ease-out both}
+@keyframes imSpin{from{transform:rotate(-40deg)}to{transform:rotate(50deg)}}
+.impact.im-w .ring{border-color:var(--c2);border-width:2px;border-right-color:transparent;border-top-color:transparent;animation-duration:.45s}
+.impact.im-w .ring2{border-color:var(--c1);border-width:2px;border-left-color:transparent;border-bottom-color:transparent;animation-duration:.55s}
+.impact.im-w .shock{width:26px;height:26px;margin:-13px 0 0 -13px;background:radial-gradient(circle,#fff,var(--c1) 55%,transparent 72%)}
+.impact.im-w .slash{height:3px;width:190px;margin-left:-95px;filter:blur(.6px);
+  background:linear-gradient(90deg,transparent,var(--c3),#fff,var(--c2),transparent)}
+.im-swirl{position:absolute;left:50%;top:50%;width:160px;height:160px;margin:-80px 0 0 -80px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0 40%,rgba(207,246,240,.55) 55%,transparent 70% 100%);
+  filter:blur(2px);animation:imSwirl .7s linear both}
+@keyframes imSwirl{0%{transform:rotate(0) scale(.4);opacity:0}25%{opacity:1}100%{transform:rotate(400deg) scale(1.5);opacity:0}}
+
+/* ☀ FENY – ragyogo kitores: sugarak es lencsefeny */
+.impact.im-l .ring{border-color:#FFF6D5;border-width:2px;animation-duration:.5s}
+.impact.im-l .ring2{border-color:var(--c2);animation-duration:.66s}
+.impact.im-l .shock{width:90px;height:90px;margin:-45px 0 0 -45px;
+  background:radial-gradient(circle,#FFFFFF,#FFF3C4 35%,rgba(242,217,141,.45) 60%,transparent 75%)}
+.impact.im-l .slash{height:4px;width:230px;margin-left:-115px;filter:blur(.5px);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15) 30%,#FFFFFF,rgba(255,255,255,.15) 70%,transparent)}
+.im-flare{position:absolute;left:50%;top:50%;width:300px;height:8px;margin:-4px 0 0 -150px;border-radius:8px;
+  background:linear-gradient(90deg,transparent,rgba(255,243,196,.9),#fff,rgba(255,243,196,.9),transparent);
+  filter:blur(2px);animation:imFlare .55s ease-out both}
+@keyframes imFlare{0%{opacity:0;transform:scaleX(.1)}25%{opacity:1}100%{opacity:0;transform:scaleX(1.25)}}
+.im-bloom{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.85),rgba(255,243,196,.35) 40%,transparent 68%);
+  filter:blur(5px);animation:imBlast .6s ease-out both}
+
+/* 🌑 SOTETSEG – beszippanto uresseg: fekete mag es arnyekcsapok */
+.impact.im-s .ring{border-color:var(--c2);animation:imImplode .6s ease-in both}
+.impact.im-s .ring2{border-color:var(--c1);animation:imImplode .72s .08s ease-in both}
+@keyframes imImplode{0%{transform:scale(1.7);opacity:0}25%{opacity:1}100%{transform:scale(.18);opacity:0}}
+.impact.im-s .shock{background:radial-gradient(circle,rgba(20,0,35,.95),rgba(139,63,217,.5) 45%,transparent 72%);
+  width:64px;height:64px;margin:-32px 0 0 -32px}
+.im-void{position:absolute;left:50%;top:50%;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;
+  background:radial-gradient(circle,#080010 0 28%,rgba(139,63,217,.55) 48%,transparent 70%);
+  filter:blur(2px);animation:imVoid .75s ease-out both}
+@keyframes imVoid{0%{transform:scale(.2);opacity:0}30%{opacity:1;transform:scale(1.1)}100%{transform:scale(.35);opacity:0}}
+.im-tendril{position:absolute;left:50%;top:50%;width:105px;height:7px;margin:-3px 0 0 0;transform-origin:0 50%;
+  border-radius:0 60% 60% 0;background:linear-gradient(90deg,rgba(120,40,200,.9),rgba(60,10,110,.55),transparent);
+  filter:blur(1.5px);animation:imTendril .68s ease-in both}
+@keyframes imTendril{0%{opacity:0;transform:rotate(var(--r,0deg)) scaleX(1.5)}30%{opacity:1}100%{opacity:0;transform:rotate(var(--r,0deg)) scaleX(.15)}}
+
+/* ---- szikrak: elemenkent mas forma es palya ---- */
+.hit-sp.sp-ember{border-radius:50%;filter:blur(.6px)}
+.hit-sp.sp-drop{border-radius:50% 50% 55% 55%/60% 60% 45% 45%}
+.hit-sp.sp-rock{border-radius:2px}
+.hit-sp.sp-streak{border-radius:6px}
+.hit-sp.sp-in{animation:hitSpIn .7s ease-in forwards}
+@keyframes hitSpIn{0%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1)}
+  20%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.3)}}
+
+/* ---- csapasnyom elemenkent ---- */
+.atk-trail.atk-f{height:16px;filter:blur(4px);border-radius:10px}
+.atk-trail.atk-v{height:9px;filter:blur(2px);border-radius:50%}
+.atk-trail.atk-e{height:20px;filter:blur(1px);border-radius:3px}
+.atk-trail.atk-w{height:4px;filter:blur(.5px)}
+.atk-trail.atk-l{height:6px;filter:blur(.5px);box-shadow:0 0 30px #FFF3C4,0 0 60px rgba(255,255,255,.6)!important}
+.atk-trail.atk-s{height:22px;filter:blur(7px);opacity:.85}
+.fly-clone.fc-l{box-shadow:0 14px 40px rgba(0,0,0,.75),0 0 40px rgba(255,243,196,.95)}
+
+/* ---- tartos varazs: lebego rovaskor ---- */
+.sigil{position:fixed;left:50%;top:50%;width:340px;height:340px;margin:-170px 0 0 -170px;z-index:74;pointer-events:none;
+  border-radius:50%;border:4px solid var(--c2);
+  box-shadow:0 0 70px var(--c1),0 0 140px var(--c2),inset 0 0 90px var(--c1);
+  animation:sigilUp 1.5s cubic-bezier(.2,.8,.3,1) both}
+.sigil::before{content:'';position:absolute;inset:26px;border-radius:50%;border:1px dashed var(--c3);opacity:.75;
+  animation:sigilSpin 3.4s linear infinite}
+.sigil::after{content:'';position:absolute;inset:74px;border-radius:50%;border:2px solid var(--c1);opacity:.6;
+  animation:sigilSpin 2.2s linear infinite reverse}
+@keyframes sigilUp{0%{opacity:0;transform:scale(.35) rotate(-25deg)}30%{opacity:1}
+  70%{opacity:.9;transform:scale(1) rotate(6deg)}100%{opacity:0;transform:scale(1.12) rotate(14deg)}}
+@keyframes sigilSpin{to{transform:rotate(360deg)}}
+.sig-mote{position:fixed;z-index:75;pointer-events:none;border-radius:50%;box-shadow:0 0 12px currentColor;
+  animation:sigMote 1.5s ease-out forwards}
+@keyframes sigMote{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1}
+  100%{opacity:0;transform:translateY(var(--dy)) scale(1.1)}}
+
+/* ============================================================
+   LYRA, a Föld Királyának Lánya – mitikus idézés és regeneráció
+============================================================ */
+.ly-veil{position:fixed;inset:0;z-index:73;pointer-events:none;
+  background:radial-gradient(ellipse at var(--x) var(--y),rgba(140,210,110,.42),rgba(90,150,70,.16) 38%,transparent 62%);
+  animation:lyVeil 1.7s ease-out both}
+@keyframes lyVeil{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+/* felszakado koszirtek a lap ket oldalan */
+.ly-pillar{position:fixed;z-index:74;pointer-events:none;width:26px;border-radius:9px 9px 3px 3px;
+  transform-origin:50% 100%;
+  background:linear-gradient(180deg,#B9C48A,#7C8A4E 38%,#46532B 72%,#2A331A);
+  box-shadow:0 0 20px rgba(150,200,110,.55),inset 0 0 12px rgba(0,0,0,.5);
+  animation:lyPillar 1.6s cubic-bezier(.15,.95,.3,1) both}
+@keyframes lyPillar{0%{height:0;opacity:0}
+  18%{opacity:1}55%{height:var(--h);opacity:1}100%{height:var(--h);opacity:0}}
+/* felfuto indak */
+.ly-vine{position:fixed;z-index:75;pointer-events:none;width:5px;border-radius:4px;
+  transform-origin:50% 100%;
+  background:linear-gradient(180deg,#C8F09A,#5FA544 55%,transparent);
+  box-shadow:0 0 12px rgba(140,230,120,.8);
+  animation:lyVine 1.5s cubic-bezier(.2,.9,.25,1) both}
+@keyframes lyVine{0%{height:0;opacity:0;transform:rotate(var(--r,0deg))}
+  20%{opacity:1}65%{height:var(--h);transform:rotate(calc(var(--r,0deg) * .35))}
+  100%{height:var(--h);opacity:0;transform:rotate(0deg)}}
+/* szirmok / levelek */
+.ly-petal{position:fixed;z-index:76;pointer-events:none;
+  border-radius:60% 0 60% 0;box-shadow:0 0 10px currentColor;
+  animation:lyPetal 1.7s ease-out forwards}
+@keyframes lyPetal{0%{opacity:0;transform:translate(0,0) rotate(0) scale(.4)}
+  15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1)}}
+/* aranyzold rovaskor a lap kozeppontjaban */
+.ly-ring{position:fixed;z-index:74;pointer-events:none;border-radius:50%;
+  border:3px solid #C9E27A;box-shadow:0 0 40px rgba(160,220,110,.9),inset 0 0 34px rgba(120,190,80,.6);
+  animation:lyRing 1.5s cubic-bezier(.2,.85,.3,1) both}
+@keyframes lyRing{0%{opacity:0;transform:scale(.2) rotate(-30deg)}
+  25%{opacity:1}70%{opacity:.9;transform:scale(1) rotate(8deg)}100%{opacity:0;transform:scale(1.35) rotate(18deg)}}
+/* regeneracio: zold gyogyulo hullam a lapon */
+.ly-regen{position:fixed;z-index:77;pointer-events:none;border-radius:12px;overflow:hidden;
+  box-shadow:0 0 34px rgba(150,240,120,.95),inset 0 0 26px rgba(120,220,90,.75);
+  border:2px solid #B6F58C;animation:lyRegen 1.15s ease-out both}
+@keyframes lyRegen{0%{opacity:0;transform:scale(.86)}22%{opacity:1;transform:scale(1.06)}
+  60%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.02)}}
+.ly-regen i{position:absolute;left:-20%;right:-20%;height:38%;
+  background:linear-gradient(180deg,transparent,rgba(200,255,170,.85),transparent);
+  filter:blur(3px);animation:lySweep 1.15s ease-out both}
+@keyframes lySweep{0%{top:105%}100%{top:-45%}}
+
+/* ---- csapda kioldasa: osszecsapodo allkapocs + vesz-vignetta ---- */
+#trap-fire{position:fixed;inset:0;z-index:79;pointer-events:none;overflow:hidden}
+#trap-fire .tf-veil{position:absolute;inset:0;animation:tfVeil .9s ease-out both;
+  background:radial-gradient(ellipse at center,transparent 32%,rgba(140,20,20,.5) 78%,rgba(60,0,0,.8) 100%)}
+@keyframes tfVeil{0%{opacity:0}22%{opacity:1}100%{opacity:0}}
+#trap-fire .tf-jaw{position:absolute;left:50%;width:52%;height:16px;margin-left:-26%;
+  background:repeating-linear-gradient(90deg,#C0392B 0 16px,#2A0A0A 16px 26px);
+  box-shadow:0 0 26px rgba(192,57,43,.9);clip-path:polygon(0 0,100% 0,96% 100%,88% 0,80% 100%,72% 0,64% 100%,56% 0,48% 100%,40% 0,32% 100%,24% 0,16% 100%,8% 0,4% 100%)}
+#trap-fire .tf-jaw.top{top:22%;animation:tfJawT .55s cubic-bezier(.4,1.6,.5,1) both}
+#trap-fire .tf-jaw.bot{bottom:22%;transform:scaleY(-1);animation:tfJawB .55s cubic-bezier(.4,1.6,.5,1) both}
+@keyframes tfJawT{0%{opacity:0;transform:translateY(-140px)}30%{opacity:1}100%{opacity:1;transform:translateY(0)}}
+@keyframes tfJawB{0%{opacity:0;transform:scaleY(-1) translateY(-140px)}30%{opacity:1}100%{opacity:1;transform:scaleY(-1) translateY(0)}}
+#trap-fire .tf-txt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#FF9C7A;
+  font-size:34px;letter-spacing:10px;text-shadow:0 0 26px rgba(192,57,43,1),0 3px 10px #000;white-space:nowrap;
+  animation:tfTxt .9s ease-out both}
+@keyframes tfTxt{0%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}22%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  75%{opacity:1}100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -891,6 +1089,7 @@ body.targeting #board .card.selectable{animation:targetGlow 1.1s ease-in-out inf
 const IMG = {"e4": "assets/kartyak/e4.jpg", "a25": "assets/kartyak/a25.jpg", "e22": "assets/kartyak/e22.jpg", "f32": "assets/kartyak/f32.jpg", "w30": "assets/kartyak/w30.jpg", "d2": "assets/kartyak/d2.jpg", "a1": "assets/kartyak/a1.jpg", "w3": "assets/kartyak/w3.jpg", "a16": "assets/kartyak/a16.jpg", "e5": "assets/kartyak/e5.jpg", "e29": "assets/kartyak/e29.jpg", "a9": "assets/kartyak/a9.jpg", "e21": "assets/kartyak/e21.jpg", "cover": "assets/kartyak/cover.jpg", "0": "assets/kartyak/0.jpg", "26": "assets/kartyak/26.jpg", "e6": "assets/kartyak/e6.jpg", "w11": "assets/kartyak/w11.jpg", "f20": "assets/kartyak/f20.jpg", "a31": "assets/kartyak/a31.jpg", "6": "assets/kartyak/6.jpg", "w6": "assets/kartyak/w6.jpg", "a38": "assets/kartyak/a38.jpg", "e23": "assets/kartyak/e23.jpg", "14": "assets/kartyak/14.jpg", "28": "assets/kartyak/28.jpg", "32": "assets/kartyak/32.jpg", "20": "assets/kartyak/20.jpg", "e13": "assets/kartyak/e13.jpg", "a2": "assets/kartyak/a2.jpg", "e14": "assets/kartyak/e14.jpg", "f3": "assets/kartyak/f3.jpg", "e19": "assets/kartyak/e19.jpg", "f0": "assets/kartyak/f0.jpg", "e11": "assets/kartyak/e11.jpg", "e30": "assets/kartyak/e30.jpg", "f1": "assets/kartyak/f1.jpg", "w35": "assets/kartyak/w35.jpg", "e33": "assets/kartyak/e33.jpg", "a37": "assets/kartyak/a37.jpg", "a21": "assets/kartyak/a21.jpg", "e24": "assets/kartyak/e24.jpg", "a15": "assets/kartyak/a15.jpg", "w19": "assets/kartyak/w19.jpg", "w21": "assets/kartyak/w21.jpg", "w34": "assets/kartyak/w34.jpg", "a18": "assets/kartyak/a18.jpg", "31": "assets/kartyak/31.jpg", "f29": "assets/kartyak/f29.jpg", "f21": "assets/kartyak/f21.jpg", "back": "assets/kartyak/back.jpg", "f28": "assets/kartyak/f28.jpg", "9": "assets/kartyak/9.jpg", "f37": "assets/kartyak/f37.jpg", "w24": "assets/kartyak/w24.jpg", "a23": "assets/kartyak/a23.jpg", "35": "assets/kartyak/35.jpg", "12": "assets/kartyak/12.jpg", "f19": "assets/kartyak/f19.jpg", "e7": "assets/kartyak/e7.jpg", "d1": "assets/kartyak/d1.jpg", "15": "assets/kartyak/15.jpg", "e18": "assets/kartyak/e18.jpg", "13": "assets/kartyak/13.jpg", "f14": "assets/kartyak/f14.jpg", "a12": "assets/kartyak/a12.jpg", "e37": "assets/kartyak/e37.jpg", "e10": "assets/kartyak/e10.jpg", "f33": "assets/kartyak/f33.jpg", "a6": "assets/kartyak/a6.jpg", "23": "assets/kartyak/23.jpg", "a8": "assets/kartyak/a8.jpg", "w12": "assets/kartyak/w12.jpg", "f22": "assets/kartyak/f22.jpg", "w26": "assets/kartyak/w26.jpg", "e15": "assets/kartyak/e15.jpg", "f13": "assets/kartyak/f13.jpg", "f9": "assets/kartyak/f9.jpg", "w14": "assets/kartyak/w14.jpg", "f4": "assets/kartyak/f4.jpg", "a36": "assets/kartyak/a36.jpg", "a4": "assets/kartyak/a4.jpg", "w7": "assets/kartyak/w7.jpg", "f16": "assets/kartyak/f16.jpg", "10": "assets/kartyak/10.jpg", "a29": "assets/kartyak/a29.jpg", "5": "assets/kartyak/5.jpg", "e31": "assets/kartyak/e31.jpg", "22": "assets/kartyak/22.jpg", "w18": "assets/kartyak/w18.jpg", "a14": "assets/kartyak/a14.jpg", "e3": "assets/kartyak/e3.jpg", "e32": "assets/kartyak/e32.jpg", "e26": "assets/kartyak/e26.jpg", "f36": "assets/kartyak/f36.jpg", "e20": "assets/kartyak/e20.jpg", "d0": "assets/kartyak/d0.jpg", "a32": "assets/kartyak/a32.jpg", "w9": "assets/kartyak/w9.jpg", "f10": "assets/kartyak/f10.jpg", "e9": "assets/kartyak/e9.jpg", "f23": "assets/kartyak/f23.jpg", "w2": "assets/kartyak/w2.jpg", "w20": "assets/kartyak/w20.jpg", "w31": "assets/kartyak/w31.jpg", "30": "assets/kartyak/30.jpg", "f2": "assets/kartyak/f2.jpg", "w25": "assets/kartyak/w25.jpg", "19": "assets/kartyak/19.jpg", "e16": "assets/kartyak/e16.jpg", "e27": "assets/kartyak/e27.jpg", "f30": "assets/kartyak/f30.jpg", "e25": "assets/kartyak/e25.jpg", "18": "assets/kartyak/18.jpg", "e36": "assets/kartyak/e36.jpg", "w15": "assets/kartyak/w15.jpg", "field2": "assets/kartyak/field2.jpg", "f24": "assets/kartyak/f24.jpg", "a35": "assets/kartyak/a35.jpg", "24": "assets/kartyak/24.jpg", "e17": "assets/kartyak/e17.jpg", "w22": "assets/kartyak/w22.jpg", "f34": "assets/kartyak/f34.jpg", "f26": "assets/kartyak/f26.jpg", "a7": "assets/kartyak/a7.jpg", "w8": "assets/kartyak/w8.jpg", "w29": "assets/kartyak/w29.jpg", "e35": "assets/kartyak/e35.jpg", "f5": "assets/kartyak/f5.jpg", "w23": "assets/kartyak/w23.jpg", "a33": "assets/kartyak/a33.jpg", "a30": "assets/kartyak/a30.jpg", "34": "assets/kartyak/34.jpg", "a17": "assets/kartyak/a17.jpg", "f11": "assets/kartyak/f11.jpg", "w5": "assets/kartyak/w5.jpg", "field1": "assets/kartyak/field1.jpg", "a13": "assets/kartyak/a13.jpg", "f12": "assets/kartyak/f12.jpg", "f15": "assets/kartyak/f15.jpg", "a20": "assets/kartyak/a20.jpg", "f6": "assets/kartyak/f6.jpg", "f25": "assets/kartyak/f25.jpg", "a34": "assets/kartyak/a34.jpg", "1": "assets/kartyak/1.jpg", "f31": "assets/kartyak/f31.jpg", "16": "assets/kartyak/16.jpg", "w10": "assets/kartyak/w10.jpg", "17": "assets/kartyak/17.jpg", "a28": "assets/kartyak/a28.jpg", "f17": "assets/kartyak/f17.jpg", "21": "assets/kartyak/21.jpg", "a11": "assets/kartyak/a11.jpg", "33": "assets/kartyak/33.jpg", "f35": "assets/kartyak/f35.jpg", "w33": "assets/kartyak/w33.jpg", "w32": "assets/kartyak/w32.jpg", "a26": "assets/kartyak/a26.jpg", "w0": "assets/kartyak/w0.jpg", "a10": "assets/kartyak/a10.jpg", "f7": "assets/kartyak/f7.jpg", "11": "assets/kartyak/11.jpg", "e1": "assets/kartyak/e1.jpg", "w4": "assets/kartyak/w4.jpg", "e12": "assets/kartyak/e12.jpg", "f8": "assets/kartyak/f8.jpg", "e28": "assets/kartyak/e28.jpg", "w17": "assets/kartyak/w17.jpg", "7": "assets/kartyak/7.jpg", "w13": "assets/kartyak/w13.jpg", "a39": "assets/kartyak/a39.jpg", "a22": "assets/kartyak/a22.jpg", "a19": "assets/kartyak/a19.jpg", "f18": "assets/kartyak/f18.jpg", "w1": "assets/kartyak/w1.jpg", "2": "assets/kartyak/2.jpg", "e8": "assets/kartyak/e8.jpg", "3": "assets/kartyak/3.jpg", "27": "assets/kartyak/27.jpg", "a3": "assets/kartyak/a3.jpg", "a0": "assets/kartyak/a0.jpg", "w16": "assets/kartyak/w16.jpg", "25": "assets/kartyak/25.jpg", "e2": "assets/kartyak/e2.jpg", "e34": "assets/kartyak/e34.jpg", "f27": "assets/kartyak/f27.jpg", "a5": "assets/kartyak/a5.jpg", "4": "assets/kartyak/4.jpg", "w28": "assets/kartyak/w28.jpg", "8": "assets/kartyak/8.jpg", "29": "assets/kartyak/29.jpg", "e0": "assets/kartyak/e0.jpg", "f38": "assets/kartyak/f38.jpg", "a24": "assets/kartyak/a24.jpg", "w27": "assets/kartyak/w27.jpg", "a27": "assets/kartyak/a27.jpg", "w43": "assets/kartyak/w43.jpg", "w44": "assets/kartyak/w44.jpg", "p_s": "assets/vilag/p_s.jpg", "p_v": "assets/vilag/p_v.jpg", "p_f": "assets/vilag/p_f.jpg", "p_e": "assets/vilag/p_e.jpg", "p_w": "assets/vilag/p_w.jpg", "p_l": "assets/vilag/p_l.jpg", "p_pl": "assets/vilag/p_pl.jpg", "r_v": "assets/vilag/r_v.jpg", "worldmap": "assets/vilag/map.jpg", "r_s": "assets/vilag/r_s.jpg", "r_e": "assets/vilag/r_e.jpg", "r_f": "assets/vilag/r_f.jpg", "r_w": "assets/vilag/r_w.jpg", "r_l": "assets/vilag/r_l.jpg"};
 const MUS = {"t0": "assets/zene/t0.mp3", "t1": "assets/zene/t1.mp3", "t2": "assets/zene/t2.mp3", "t3": "assets/zene/t3.mp3", "t4": "assets/zene/t4.mp3", "t5": "assets/zene/t5.mp3"};
 IMG['noira']="assets/kartyak/noira.jpg";
+IMG['p_noira']="assets/vilag/p_noira.jpg";   // Noira búcsúportréja (szövegbuborékos)
 IMG['kraken']="assets/kartyak/kraken.jpg";
 IMG['melysegtitka']="assets/kartyak/melysegtitka.jpg";
 IMG['jegtukor']="assets/kartyak/jegtukor.jpg";
@@ -1583,7 +1782,7 @@ async function startDuel(elem, lvlMode){
   await greetDuel(aiElem);
   G={pl:newSide([...SAVE.deck]), ai:newSide(shuffle(pools[aiElem])), turn:0, over:false, freezeAll:0, calm:0, airShield:false, aiElem, lvl, hard:true};
   $('board').style.backgroundImage=`linear-gradient(rgba(13,7,22,.42), rgba(13,7,22,.66)), url(${IMG[Math.random()<.5?'field1':'field2']})`;
-  for(let i=0;i<5;i++){draw('pl',true);draw('ai',true);}
+  for(let i=0;i<5;i++){await draw('pl',true);await draw('ai',true);}
   $('log').innerHTML='';
   selectedAttacker=null; targeting=null; busy=true;
   showScreen('duel'); renderAll();
@@ -1594,12 +1793,35 @@ async function startDuel(elem, lvlMode){
   log(starter==='pl'?'A pénzfeldobást megnyerted: te kezdesz!':'A pénzfeldobás az ellenfélnek kedvez: ő kezd.');
   beginTurn(starter);
 }
-function draw(side,silent){
+async function draw(side,silent){
   const S=G[side];
   if(S.deck.length===0){ if(!silent){damagePlayer(side,2,true);log((side==='pl'?'Elfogyott a paklid':'Az ellenfél paklija elfogyott')+' – 2 sebzés a fáradtságtól!');} return; }
-  if(S.hand.length>=8){ S.grave.push(S.deck.pop()); return; }
-  const card=S.deck.pop(); S.hand.push(card);
+  const card=S.deck.pop();
+  S.hand.push(card);
   if(!silent){ if(side==='pl')sfx.draw(); drawFx(side, card.id); }
+  // A kéz legfeljebb 8 lap: a húzott lap is bekerül, majd a játékos dönti el, mit dob el.
+  if(S.hand.length>8) await handOverflow(side);
+}
+/* A kéz túlcsordulása: emberi játékosnál választható, melyik lap essen ki. */
+async function handOverflow(side){
+  const S=G[side];
+  let guard=0;
+  while(S.hand.length>8 && guard++<12){
+    let pick=null;
+    if(isHu(side)){
+      renderAll();
+      pick = await pickFromList(
+        'A kezed megtelt (maximum 8 lap) – válaszd ki, melyik lapot dobod el!',
+        S.hand, false, true);
+    }
+    // AI, hálózati ellenfél, vagy ha valamiért nem érkezett válasz: az utoljára húzott lap megy
+    if(!pick) pick = S.hand[S.hand.length-1];
+    const i=S.hand.indexOf(pick); if(i<0) break;
+    S.hand.splice(i,1); S.grave.push(pick);
+    log(`🖐 A kéz megtelt – ${side==='pl'?'eldobtad':'az ellenfél eldobta'}: <b>${DB[pick.id].n}</b>.`, side==='pl'?'me':'foe');
+    try{ sfx.spell(); }catch(e){}
+    renderAll();
+  }
 }
 function drawFx(side, cardId){
   try{
@@ -1773,7 +1995,7 @@ async function beginTurn(side){
   }
   // Láva Goblin: erősödik
   for(const m of S.field) if(m.id==='lavagoblin'){ m.permA+=1; log(`${DB.lavagoblin.n} forróbb lett: +1 Támadás.`); }
-  draw(side); S.mana=Math.min(10,S.mana+5);
+  await draw(side); S.mana=Math.min(10,S.mana+5);
   S.field.forEach(m=>{m.summoned=false;m.attacked=false;m.shieldUsed=false;m.atkUsed=0;m.wolfBonus=false;m.noCounter=false;});
   if(G.freezeAll>0) log(`❄ ${DB.melyfagyasztas.n} tombol: egyik oldal szörnyei sem támadhatnak!`);
   renderAll();
@@ -1812,7 +2034,8 @@ async function endTurn(side){
   // Pokoli Erő: a felruházott szörny a kör végén elpusztul
   for(const m of [...S.field]) if(m.doom&&findM(m.u)){
     log(`🔥 ${DB.pokoliero.n} beteljesíti az árát: ${DB[m.id].n} megsemmisül!`, side==='pl'?'me':'foe');
-    await damageMonster(m,999,null,true); if(findM(m.u)) await killMonster(m,null);
+    // noReflect: a saját Lidérced ne sebezze halálra az ellenfelet a Pokoli Erő árán át
+    await damageMonster(m,999,null,true,true); if(findM(m.u)) await killMonster(m,null);
   }
   // égés-tick: a kört záró játékos égő szörnyei sebződnek
   for(const m of [...S.field]){
@@ -1919,7 +2142,9 @@ async function damagePlayer(side,n,noMirror,_isMirror){
 }
 async function healPlayer(side,n){ const S=G[side]; S.hp=Math.min(50,S.hp+n); sfx.heal(); floatNum($(side+'-hp'),n,true); renderHud(); }
 
-async function damageMonster(m,n,src,pierceNone){
+/* noReflect: a sebzés nem indítja el a Lidérc kín-megosztását
+   (a Pokoli Erő kör végi megsemmisítése 999 sebzéssel dolgozik) */
+async function damageMonster(m,n,src,pierceNone,noReflect){
   if(!m||n<=0)return 0;
   if(m) m.absorbedShield=false;
   if(m) m.wallGuarded=false;
@@ -1975,8 +2200,13 @@ async function damageMonster(m,n,src,pierceNone){
   if(el){el.classList.remove('struck');void el.offsetWidth;el.classList.add('struck');floatNum(el,-n);}
   sfx.hit();
   if(m.id==='verfarkas'){ m.permA+=2; log(`${DB.verfarkas.n} megvadul: +2 Támadás!`); }
-  if(m.id==='liderc'){ const owner=sideOf(m); log(`${DB.liderc.n} megosztja a kínt!`); await damagePlayer(other(owner),n); }
-  if(m.hp>0&&m.id==='lyraearth'&&m.hp<m.maxHp){ m.hp=m.maxHp; log(`${DB.lyraearth.n} regenerálódik: Élete visszaáll!`); }
+  if(m.id==='liderc'&&!noReflect){ const owner=sideOf(m); log(`${DB.liderc.n} megosztja a kínt!`); await damagePlayer(other(owner),n); }
+  if(m.hp>0&&m.id==='lyraearth'&&m.hp<m.maxHp){
+    const gyogyult=m.maxHp-m.hp; m.hp=m.maxHp;
+    log(`🌿 <b>${DB.lyraearth.n}</b> regenerálódik: a föld visszaadja az erejét – +${gyogyult} Élet!`, sideOf(m)==='pl'?'me':'foe');
+    const lel=document.querySelector(`[data-u="${m.u}"]`);
+    if(lel){ lyraRegenFx(lel); floatNum(lel,gyogyult,true); }
+  }
   renderFields();
   if(m.hp<=0){
     if(m.equip==='foldszive'&&!m.heartUsed){ m.heartUsed=true; m.hp=1;
@@ -2021,7 +2251,7 @@ async function killMonster(m,killer){
   // Lélekfaló mindkét oldalon
   for(const f of [...G.pl.field,...G.ai.field]) if(f.id==='lelekfalo'){ f.permA++; f.permH++; f.hp++; f.maxHp++; log(`${DB.lelekfalo.n} felfalja a lelket: +1/+1!`); }
   // halál-effektek
-  if(m.id==='csontvazharcos'){ draw(side); log(`${DB.csontvazharcos.n}: ${side==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`); }
+  if(m.id==='csontvazharcos'){ await draw(side); log(`${DB.csontvazharcos.n}: ${side==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`); }
   if(m.id==='parazsszellem'){
     const foeF=G[other(side)];
     if(foeF.field.length){
@@ -2148,7 +2378,46 @@ function trapSetFx(side){
 const CAST_COL={f:['#FFB347','#FF6A00','#FFE082'],v:['#9CD3FF','#4FC3F7','#E1F5FE'],
   e:['#A3D977','#6B8E23','#D7CCA3'],w:['#CFF6F0','#7FD8C8','#FFFFFF'],s:['#C77DFF','#8B3FD9','#3D2A5C'],
   l:['#FFF3C4','#F2D98D','#FFFFFF']};
+/* ---- TARTÓS varázs: lassan felemelkedő rovaskör, felszálló szikrákkal ---- */
+function sigilFx(el){
+  try{
+    const cols=CAST_COL[el||'s']||CAST_COL.s;
+    const s=document.createElement('div'); s.className='sigil';
+    s.style.setProperty('--c1',cols[0]); s.style.setProperty('--c2',cols[1]); s.style.setProperty('--c3',cols[2]);
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1600);
+    const cx=window.innerWidth/2, cy=window.innerHeight/2;
+    for(let i=0;i<26;i++){
+      const p=document.createElement('i'); p.className='sig-mote';
+      p.style.left=(cx+(Math.random()*320-160))+'px';
+      p.style.top=(cy+70+Math.random()*90)+'px';
+      p.style.setProperty('--dy',(-170-Math.random()*230)+'px');
+      const c=cols[Math.floor(Math.random()*cols.length)];
+      p.style.background=c; p.style.color=c;
+      p.style.width=p.style.height=(3+Math.random()*6)+'px';
+      p.style.animationDelay=(Math.random()*.5)+'s';
+      document.body.appendChild(p); setTimeout(()=>p.remove(),2200);
+    }
+    fxTint(el);
+    try{ tone(220,.95,'sine',.09,0,60); tone(330,.75,'triangle',.055,.12,40); }catch(e){}
+  }catch(e){}
+}
+/* ---- CSAPDA kioldása: összecsapódó fogsor és vészvörös vignetta ---- */
+function trapFireFx(el){
+  try{
+    const d=document.createElement('div'); d.id='trap-fire';
+    d.innerHTML='<div class="tf-veil"></div><div class="tf-jaw top"></div>'+
+                '<div class="tf-jaw bot"></div><div class="tf-txt">⚠ CSAPDA ⚠</div>';
+    document.body.appendChild(d); setTimeout(()=>d.remove(),1050);
+    const b=$('board');
+    if(b){ b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+           setTimeout(()=>b.classList.remove('shake'),520); }
+    fxTint(el);
+    try{ noise(.26,.22); tone(70,.5,'square',.16,0,-20); tone(1400,.14,'sawtooth',.09,.02,-900); }catch(e){}
+  }catch(e){}
+}
 function spellCastFx(el,kind){
+  if(kind==='tartos') return sigilFx(el);
+  if(kind==='csapda') return trapFireFx(el);
   try{
     const cols=CAST_COL[el||'s']||CAST_COL.s;
     const w=document.createElement('div'); w.className='cast-fx cast-'+(el||'s');
@@ -2217,6 +2486,92 @@ function summonFx(el, elem){
     const r=el.getBoundingClientRect();
     elemSummonFx(r.left+r.width/2, r.top+r.height/2, elem||'s');
     try{ sfx.elemSummon(elem); }catch(e){}
+  }catch(e){}
+}
+/* ============================================================
+   LYRA (mitikus Föld) – saját idézési és regenerációs animáció
+============================================================ */
+const LY_GREEN=['#C8F09A','#8FD35F','#5FA544','#E4F7B8','#B9C48A'];
+function lyraSummonFx(cardEl){
+  try{
+    const r=cardEl.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2, base=r.bottom;
+    const put=(n,life)=>{ document.body.appendChild(n); setTimeout(()=>n.remove(),life); return n; };
+    // zöld fátyol az egész képernyőn, a lapból kiindulva
+    const v=document.createElement('div'); v.className='ly-veil';
+    v.style.setProperty('--x',cx+'px'); v.style.setProperty('--y',cy+'px'); put(v,1800);
+    // rovaskör a lap közepén
+    const ring=document.createElement('div'); ring.className='ly-ring';
+    const rs=Math.max(r.width,r.height)*1.9;
+    Object.assign(ring.style,{width:rs+'px',height:rs+'px',left:(cx-rs/2)+'px',top:(cy-rs/2)+'px'});
+    put(ring,1600);
+    // a lapot nem takarjuk el: minden a két oldalán tör fel
+    const flank=(min,max)=>{ const s=Math.random()<.5?-1:1;
+      return s*r.width*(min+Math.random()*(max-min)); };
+    // felszakadó kősziklák
+    for(let i=0;i<8;i++){
+      const p=document.createElement('i'); p.className='ly-pillar';
+      const off=flank(0.62,1.45);
+      const h=r.height*(0.45+Math.random()*0.8);
+      p.style.setProperty('--h',h+'px');
+      Object.assign(p.style,{left:(cx+off-13)+'px',top:(base-h)+'px',height:'0px',
+        animationDelay:(Math.random()*.18)+'s'});
+      put(p,1750);
+    }
+    // felfutó indák
+    for(let i=0;i<10;i++){
+      const vn=document.createElement('i'); vn.className='ly-vine';
+      const off=flank(0.52,1.35);
+      const h=r.height*(0.6+Math.random()*0.95);
+      vn.style.setProperty('--h',h+'px');
+      vn.style.setProperty('--r',((Math.random()*40-20))+'deg');
+      Object.assign(vn.style,{left:(cx+off)+'px',top:(base-h)+'px',height:'0px',
+        animationDelay:(Math.random()*.35)+'s'});
+      put(vn,1700);
+    }
+    // szirmok
+    for(let i=0;i<26;i++){
+      const p=document.createElement('i'); p.className='ly-petal';
+      const a=Math.random()*Math.PI*2, d=60+Math.random()*190;
+      const s=5+Math.random()*9;
+      const col=LY_GREEN[Math.floor(Math.random()*LY_GREEN.length)];
+      p.style.setProperty('--dx',(Math.cos(a)*d)+'px');
+      p.style.setProperty('--dy',(-Math.abs(Math.sin(a)*d)-60)+'px');
+      p.style.setProperty('--rot',(Math.random()*720-360)+'deg');
+      Object.assign(p.style,{left:(cx+(Math.random()*r.width-r.width/2))+'px',
+        top:(cy+(Math.random()*r.height*.5))+'px',width:s+'px',height:(s*1.5)+'px',
+        background:col,color:col,animationDelay:(Math.random()*.4)+'s'});
+      put(p,1900);
+    }
+    // a föld megrendül
+    const b=$('board');
+    if(b){ b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+           setTimeout(()=>b.classList.remove('shake'),700); }
+    try{ noise(.5,.2); tone(80,.8,'square',.14,0,25); tone(320,.7,'sine',.07,.18,180); }catch(e){}
+  }catch(e){}
+}
+function lyraRegenFx(cardEl){
+  try{
+    const r=cardEl.getBoundingClientRect();
+    const cx=r.left+r.width/2;
+    const w=document.createElement('div'); w.className='ly-regen';
+    w.innerHTML='<i></i>';
+    Object.assign(w.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});
+    document.body.appendChild(w); setTimeout(()=>w.remove(),1250);
+    // felszálló levelek
+    for(let i=0;i<16;i++){
+      const p=document.createElement('i'); p.className='ly-petal';
+      const s=4+Math.random()*7;
+      const col=LY_GREEN[Math.floor(Math.random()*LY_GREEN.length)];
+      p.style.setProperty('--dx',((Math.random()*90-45))+'px');
+      p.style.setProperty('--dy',(-70-Math.random()*110)+'px');
+      p.style.setProperty('--rot',(Math.random()*540-270)+'deg');
+      Object.assign(p.style,{left:(cx+(Math.random()*r.width-r.width/2))+'px',
+        top:(r.bottom-Math.random()*r.height*.5)+'px',width:s+'px',height:(s*1.5)+'px',
+        background:col,color:col,animationDelay:(Math.random()*.3)+'s'});
+      document.body.appendChild(p); setTimeout(()=>p.remove(),1900);
+    }
+    try{ sfx.heal(); tone(520,.5,'sine',.08,0,260); tone(780,.4,'triangle',.05,.12,180); }catch(e){}
   }catch(e){}
 }
 /* elemenkénti, látványos lehívási animáció a szörnyekhez */
@@ -2347,38 +2702,85 @@ function elemDeathFx(el, cardEl){
     }
   }catch(e){}
 }
+/* elemenkénti szikra-karakter: mennyiség, forma, röppálya */
+const IMPACT_SPARK={
+  f:{n:26,cls:'sp-ember', dy:-80, size:[3,9]},
+  v:{n:24,cls:'sp-drop',  dy: 24, size:[3,8]},
+  e:{n:22,cls:'sp-rock',  dy:-45, size:[4,14]},
+  w:{n:28,cls:'sp-streak',dy:-10, size:[2,5]},
+  l:{n:26,cls:'sp-ember', dy:-35, size:[2,7]},
+  s:{n:22,cls:'sp-ember', dy:-10, size:[3,9], inward:true}
+};
+/* rövid, elemszínű képernyővillanás – ettől „üt" igazán a találat */
+function fxTint(el){
+  try{
+    if(!el) return;
+    const cols=(CAST_COL[el]||CAST_COL.s);
+    const t=document.createElement('div'); t.className='fx-tint';
+    t.style.background =
+      el==='l' ? 'radial-gradient(circle at center,rgba(255,255,255,.5),rgba(255,243,196,.16) 45%,transparent 72%)' :
+      el==='s' ? 'radial-gradient(circle at center,rgba(18,0,32,.62),rgba(139,63,217,.16) 50%,transparent 78%)' :
+                 'radial-gradient(circle at center,'+cols[0]+'4D,transparent 62%)';
+    document.body.appendChild(t); setTimeout(()=>t.remove(),480);
+  }catch(e){}
+}
 function impactAt(x,y,el){
+  const cols=(CAST_COL[el||'s']||CAST_COL.s);
   const d=document.createElement('div'); d.className='impact'+(el?' im-'+el:'');
   d.style.left=(x-75)+'px'; d.style.top=(y-75)+'px';
+  d.style.setProperty('--c1',cols[0]); d.style.setProperty('--c2',cols[1]); d.style.setProperty('--c3',cols[2]);
+  // elemenkénti kiegészítő rétegek
+  let extra='';
+  if(el==='f')      extra='<i class="im-blast"></i><i class="im-smoke"></i>';
+  else if(el==='v') extra='<i class="im-splash"></i>';
+  else if(el==='e') extra='<i class="im-dust"></i><i class="im-crack"></i><i class="im-crack c2"></i><i class="im-crack c3"></i>';
+  else if(el==='w') extra='<i class="im-swirl"></i>';
+  else if(el==='l') extra='<i class="im-bloom"></i><i class="im-flare"></i>';
+  else if(el==='s') extra='<i class="im-void"></i>'+
+       [0,72,144,216,288].map(r=>'<i class="im-tendril" style="--r:'+r+'deg"></i>').join('');
   d.innerHTML='<i class="ring"></i><i class="ring2"></i><i class="shock"></i>'+
-    '<i class="slash" style="--rot:35deg"></i><i class="slash s2" style="--rot:-44deg"></i><i class="slash s3" style="--rot:88deg"></i>';
-  document.body.appendChild(d); setTimeout(()=>d.remove(),820);
+    '<i class="slash" style="--rot:35deg"></i><i class="slash s2" style="--rot:-44deg"></i><i class="slash s3" style="--rot:88deg"></i>'+extra;
+  document.body.appendChild(d); setTimeout(()=>d.remove(),1150);
   // szikrák a becsapódás pontján
-  const cols=(CAST_COL[el||'s']||CAST_COL.s);
-  for(let i=0;i<18;i++){
-    const p=document.createElement('i'); p.className='hit-sp';
+  const S=IMPACT_SPARK[el]||null;
+  const n=S?S.n:18;
+  for(let i=0;i<n;i++){
+    const p=document.createElement('i');
+    p.className='hit-sp'+(S?' '+S.cls:'')+(S&&S.inward?' sp-in':'');
     const a=Math.random()*Math.PI*2, dd=40+Math.random()*150;
     p.style.left=x+'px'; p.style.top=y+'px';
     p.style.setProperty('--dx',(Math.cos(a)*dd)+'px');
-    p.style.setProperty('--dy',(Math.sin(a)*dd-30)+'px');
+    p.style.setProperty('--dy',(Math.sin(a)*dd+(S?S.dy:-30))+'px');
     const col=cols[Math.floor(Math.random()*cols.length)];
     p.style.background=col; p.style.color=col;
-    p.style.width=p.style.height=(3+Math.random()*6)+'px';
-    document.body.appendChild(p); setTimeout(()=>p.remove(),780);
+    const sz = S ? (S.size[0]+Math.random()*(S.size[1]-S.size[0])) : (3+Math.random()*6);
+    if(S&&S.cls==='sp-streak'){ p.style.width=(14+Math.random()*24)+'px'; p.style.height='2px'; }
+    else p.style.width=p.style.height=sz+'px';
+    document.body.appendChild(p); setTimeout(()=>p.remove(),860);
   }
-  // rövid, erős képernyőrázás
-  const b=$('board'); if(b){ b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); setTimeout(()=>b.classList.remove('shake'),420); }
+  fxTint(el);
+  // képernyőrázás – a Föld nehezebben, hosszabban ráz
+  const b=$('board');
+  if(b){ b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+    setTimeout(()=>b.classList.remove('shake'), el==='e'?640:(el==='l'?260:420)); }
 }
 function slashTrail(x1,y1,x2,y2,el){
   try{
-    const len=Math.hypot(x2-x1,y2-y1), ang=Math.atan2(y2-y1,x2-x1)*180/Math.PI;
-    const t=document.createElement('div'); t.className='atk-trail atk-'+(el||'s');
-    t.style.left=x1+'px'; t.style.top=(y1-5)+'px'; t.style.width=len+'px';
-    t.style.transform='rotate('+ang+'deg)';
     const cols=(CAST_COL[el||'s']||CAST_COL.s);
-    t.style.background='linear-gradient(90deg,transparent,'+cols[1]+','+cols[0]+')';
-    t.style.boxShadow='0 0 22px '+cols[0];
-    document.body.appendChild(t); setTimeout(()=>t.remove(),520);
+    const len=Math.hypot(x2-x1,y2-y1)||1, ang=Math.atan2(y2-y1,x2-x1)*180/Math.PI;
+    const nx=-(y2-y1)/len, ny=(x2-x1)/len;         // merőleges egységvektor az eltoláshoz
+    const mk=(off,delay,alt)=>{
+      const t=document.createElement('div'); t.className='atk-trail atk-'+(el||'s');
+      t.style.left=(x1+nx*off)+'px'; t.style.top=(y1-5+ny*off)+'px'; t.style.width=len+'px';
+      t.style.transform='rotate('+ang+'deg)';
+      t.style.background='linear-gradient(90deg,transparent,'+cols[alt?2:1]+','+cols[alt?1:0]+')';
+      t.style.boxShadow='0 0 22px '+cols[0];
+      if(delay) t.style.animationDelay=delay+'s';
+      document.body.appendChild(t); setTimeout(()=>t.remove(),640);
+    };
+    if(el==='w'){ mk(-14,0); mk(0,.05,true); mk(14,.1); }   // szél: három penge-ív
+    else if(el==='f'){ mk(0,0); mk(0,.06,true); }           // tűz: külső láng + fehér mag
+    else mk(0,0);
   }catch(e){}
 }
 /* ============================================================
@@ -2762,6 +3164,7 @@ async function noiraCheck(side){
   }
   await noiraCinematic(side);
   const m=makeMonster('noira'); m.summoned=false; S.field.push(m);
+  G.noiraSeen=side;   // 'ai' esetén ő búcsúzik a párbaj végén a Sötétség Ura helyett
   log('\uD83C\uDF11 <b>NOIRA, az \u00c9j \u00darn\u0151je</b> megjelenik '+noiraSideName(side)+'! Sebezhetetlen \u2013 \u00e9s minden k\u00f6r elej\u00e9n mindenkire lesujt a Fekete Aura.', side==='pl'?'me':'foe');
   renderAll();
   const el=document.querySelector('[data-u="'+m.u+'"]'); if(el) summonFx(el,'s');
@@ -3226,7 +3629,7 @@ async function attack(att,target){ // target: monster vagy 'face'
     log(`${DB[att.id].n} közvetlenül ${dside==='pl'?'téged támad':'az ellenfelet támadja'}: ${dmg} sebzés!`, aside==='pl'?'me':'foe');
     await damagePlayer(dside,dmg);
     lifesteal(att,dmg);
-    if(att.id==='tengerikigyo'&&!G.over){ draw(aside); log(`${DB.tengerikigyo.n}: ${aside==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`); }
+    if(att.id==='tengerikigyo'&&!G.over){ await draw(aside); log(`${DB.tengerikigyo.n}: ${aside==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`); }
     if(att.id==='langlovag'&&!G.over){ att.permA+=1; log(`${DB.langlovag.n} lángja erősödik: +1 Támadás!`); }
   }else{
     log(`${DB[att.id].n} megtámadja: ${DB[target.id].n} (${dmg} sebzés).`, aside==='pl'?'me':'foe');
@@ -3309,14 +3712,16 @@ async function playCard(side,card){ // card: {id,u} kézben
     let mcost=c.mana;
     if(c.el==='e'&&!S.soilUsed&&S.spells.some(x=>x.id==='termekenytalaj')) mcost=Math.max(0,mcost-1);
     if(S.mana<mcost||S.field.length>=5)return false;
-    if(c.leg) await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás szörnyet idézel!':'Az ellenfél legendás szörnyet idéz!', true);
+    if(c.leg){ await legendCallScene(side);
+      await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás szörnyet idézel!':'Az ellenfél legendás szörnyet idéz!', true); }
     if(mcost<c.mana){ S.soilUsed=true; log(`${DB.termekenytalaj.n}: a lehívás 1 manával olcsóbb.`, side==='pl'?'me':'foe'); }
     S.mana-=mcost; removeFromHand();
     const m=makeMonster(card.id); applyPajzs(side,m); S.field.push(m);
     log(`${side==='pl'?'Megidézed':'Az ellenfél megidézi'}: <b>${c.n}</b>.`, side==='pl'?'me':'foe');
     renderAll();
     const sel=document.querySelector(`[data-u="${m.u}"]`);
-    if(sel) summonFx(sel, m.el);
+    if(sel && m.id==='lyraearth') lyraSummonFx(sel);   // mitikus Lyra: saját idézési jelenet
+    else if(sel) summonFx(sel, m.el);
     else sfx.elemSummon(m.el);
     await sleep(700);
     const foeT=G[other(side)];
@@ -3343,7 +3748,8 @@ async function playCard(side,card){ // card: {id,u} kézben
   }
   if(c.t==='equip'){
     if(S.field.filter(m=>!m.equip).length===0)return false;
-    if(c.leg) await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás felszerelést idézel!':'Az ellenfél legendás felszerelést idéz!', true);
+    if(c.leg){ await legendCallScene(side);
+      await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás felszerelést idézel!':'Az ellenfél legendás felszerelést idéz!', true); }
     const t = isHu(side)
       ? await pickTargetOnField('Válaszd ki, melyik szörnyed kapja a felszerelést!', S.field.filter(m=>!m.equip))
       : S.field.filter(m=>!m.equip).sort((a,b)=>effAtk(b)-effAtk(a))[0];
@@ -3365,6 +3771,7 @@ async function playCard(side,card){ // card: {id,u} kézben
   const pick = async (title,list,fromGrave)=> isHu(side) ? (fromGrave?await pickFromList(title,list):await pickTargetOnField(title,list)) : aiPick(list,fromGrave);
 
   if(c.t==='spell'&&c.leg){
+    await legendCallScene(side);
     await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás varázslatot idézel!':'Az ellenfél legendás varázslatot idéz!', true);
   }
   // Varázsörvény / Szélfordítás: az ellenfél lefordított csapdája semlegesíti a varázslatot
@@ -3496,7 +3903,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       const discarded=foe.hand.map(x=>({id:x.id,u:x.u})); const dside=other(side);
       try{ await windDiscardFx(dside, discarded); }catch(e){}
       foe.grave.push(...discarded); foe.hand=[];
-      for(let i=0;i<n;i++) draw(dside,true);
+      for(let i=0;i<n;i++) await draw(dside,true);
       log(`<b>${c.n}</b>: az ellenfél eldobja mind a(z) ${n} lapját, és ugyanannyit húz.`, side==='pl'?'me':'foe');
       renderAll(); break; }
     case 'villamcsapas':{
@@ -3623,7 +4030,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       log(`🌀 <b>${c.n}</b>: ${DB[t.id].n}et a levegő tartja fogva – nem támadhat, és visszatámadni sem tud!`, side==='pl'?'me':'foe');
       renderFields(); break; }
     case 'szelekbolcsessege':{ toGrave();
-      for(let i=0;i<3;i++) draw(side,true);
+      for(let i=0;i<3;i++) await draw(side,true);
       renderAll();
       if(S.hand.length){
         let d;
@@ -3636,7 +4043,7 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'felszalloaramlat':{ const winds=S.field.filter(x=>x.el==='w'); if(!winds.length)return false;
       const t=await pick('Felszálló Áramlat: melyik Szél szörnyed emelkedjen vissza a kezedbe?',winds); if(!t)return false;
       toGrave(); await bounceToHand(t);
-      S.mana=Math.min(10,S.mana+5); draw(side);
+      S.mana=Math.min(10,S.mana+5); await draw(side);
       log(`<b>${c.n}</b>: +5 Mana és húzol 1 lapot.`, side==='pl'?'me':'foe');
       renderAll(); break; }
     case 'szelcsend':{ toGrave(); G.calm=4;
@@ -3844,7 +4251,7 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'veraldozat':{ if(!S.field.length)return false;
       const t=await pick('Válaszd ki az áldozatot!',S.field); if(!t)return false;
       toGrave(); log(`<b>${c.n}</b>: ${DB[t.id].n} feláldozva.`, side==='pl'?'me':'foe');
-      await killMonster(t,null); draw(side); draw(side); break; }
+      await killMonster(t,null); await draw(side); await draw(side); break; }
     case 'nekromancia':{ const g=S.grave.filter(x=>DB[x.id].t==='monster'&&isDark(x.id)); if(!g.length||S.field.length>=5)return false;
       const t=await pick('Válassz egy szörnyet a dobópakliból!',g,true); if(!t)return false;
       toGrave(); S.grave.splice(S.grave.indexOf(t),1);
@@ -3877,7 +4284,7 @@ async function playCard(side,card){ // card: {id,u} kézben
     default: return false;
   }
   } finally { window._castEl=null; }
-  if(c.t==='spell' && c.el==='l'){ for(const fm of S.field.filter(x=>x.id==='fenymagus')){ draw(side); log(`${DB.fenymagus.n}: Fény varázslat – ${side==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`, side==='pl'?'me':'foe'); } }
+  if(c.t==='spell' && c.el==='l'){ for(const fm of S.field.filter(x=>x.id==='fenymagus')){ await draw(side); log(`${DB.fenymagus.n}: Fény varázslat – ${side==='pl'?'húzol':'az ellenfél húz'} 1 lapot.`, side==='pl'?'me':'foe'); } }
   sfx.spell(); renderAll(); return true;
 }
 async function onSummon(side,m){
@@ -3923,7 +4330,7 @@ async function onSummon(side,m){
         log(`${DB.viharsaman.n} a szélbe suttog: ${side==='pl'?DB[t.id].n:'egy varázslat'} a kézbe kerül.`, side==='pl'?'me':'foe'); renderAll(); }
     }
   }
-  if(m.id==='szellomano'){ draw(side); log(`${DB.szellomano.n} titkot sodor: húzol 1 lapot.`, side==='pl'?'me':'foe'); renderAll(); }
+  if(m.id==='szellomano'){ await draw(side); log(`${DB.szellomano.n} titkot sodor: húzol 1 lapot.`, side==='pl'?'me':'foe'); renderAll(); }
   // Naporoszlán: minden más saját szörny lehívása +1/+1-et ad neki
   for(const nl of S.field.filter(x=>x.id==='naporoszlan'&&x!==m)){ nl.permA+=1; nl.hp+=1; nl.maxHp+=1; }
   if(m.id==='naporoszlan'){
@@ -4110,11 +4517,14 @@ function clearTargeting(){
   targeting=null;$('target-hint').style.display='none';document.body.classList.remove('targeting');renderFields(); }
 function clickTarget(m){ if(!targeting||!targeting.valid.includes(m.u))return; const r=targeting.resolve;clearTargeting();r(m); }
 
-let pickResolve=null;
-function pickFromList(title,list){
+let pickResolve=null, pickMandatory=false;
+function pickFromList(title,list,_unused,mandatory){
   if(NET.on&&NET.host&&NET.dec==='ai')
     return netAsk({k:'list',p:title,us:list.map(x=>({id:x.id,u:x.u,back:x.back,hidden:x.hidden}))}).then(v=>list.find(x=>x.u===v)||null);
   return new Promise(res=>{
+    // kötelező választásnál nincs Mégse és az Esc sem zárja be
+    pickMandatory=!!mandatory;
+    const cb=$('pick-cancel'); if(cb) cb.style.display = mandatory?'none':'';
     pickResolve=res; $('pick-title').textContent=title;
     const g=$('pick-grid'); g.innerHTML='';
     list.forEach(item=>{
@@ -4129,13 +4539,17 @@ function pickFromList(title,list){
         d.title=c.n+(c.tx?' – '+c.tx:'');
         d.onmouseenter=()=>setPreview(item.id);
       }
-      d.onclick=()=>{hide('pick-modal');const r=pickResolve;pickResolve=null;r(item);};
+      d.onclick=()=>{hide('pick-modal');pickMandatory=false;const r=pickResolve;pickResolve=null;r(item);};
       g.appendChild(d);
     });
     $('pick-modal').classList.add('active');
   });
 }
-function resolvePick(v){ hide('pick-modal'); if(pickResolve){const r=pickResolve;pickResolve=null;r(v);} }
+function resolvePick(v){
+  if(pickMandatory && v==null) return;   // kötelező választás: nem lehet kihátrálni
+  hide('pick-modal'); pickMandatory=false;
+  if(pickResolve){const r=pickResolve;pickResolve=null;r(v);}
+}
 function A_mostWounded(list){ const w=list.filter(m=>m.hp<m.maxHp&&m.id!=='noira').sort((a,b)=>(b.maxHp-b.hp)-(a.maxHp-a.hp)); return w[0]||null; }
 function aiPick(list,any){ // AI: legerősebb / legdrágább választása
   list=(list||[]).filter(x=>x.id!=='noira');
@@ -4780,7 +5194,8 @@ const ENDTXT={
 const BUBBLE={
   s :{l:45,r:91,t:20,b:69}, v:{l:53,r:95.5,t:18,b:72}, f:{l:50,r:95,t:21,b:72},
   e :{l:47,r:93,t:17,b:64}, w:{l:50,r:93,t:26,b:66}, l:{l:47,r:92,t:21,b:68},
-  pl:{l:12,r:52,t:20,b:78}
+  pl:{l:12,r:52,t:20,b:78},
+  noira:{l:44,r:94,t:18,b:67}
 };
 const FAREWELL={
   f:{img:'p_f',ruler:'Hamukirály',col:'#FF9C7A',
@@ -4927,6 +5342,71 @@ const PLAYER_SAY={
   firstWin:'„Az első birodalom megtört. Hat van belőlük – és mind az utamban áll."',
   firstLose:'„Szóval ilyen érzés. Rendben. Most már tudom, mire készüljek."'
 };
+/* ============================================================
+   IDÉZŐ SZAVAK – legendás és mitikus lap kijátszása előtt
+   A megszólaló mindig az, aki a lapot idézi: a játékos, vagy az
+   ellenfél birodalmának uralkodója.
+============================================================ */
+const SUMMON_CALL={
+  f:['„Ébredj, ősi láng! Mutasd meg neki a tűz valódi hatalmát!"',
+     '„A lángok legendája újra életre kel. Most már nincs menekvés!"',
+     '„Égjen a föld, izzon az ég! Elérkezett a pusztítás ideje!"'],
+  v:['„Nyílj meg, végtelen mélység, és engedd felszínre ősi uradat!"',
+     '„Az óceán legendája meghallotta a hívásomat. Most elnyelnek a hullámok!"',
+     '„A tenger mélyén szunnyadó erő most újra felemelkedik!"'],
+  e:['„Terranor ősi ereje, emelkedj fel, és rendítsd meg az egész csatateret!"',
+     '„A hegyek legendája felébredt. Előtte még a birodalmak is meghajolnak!"',
+     '„A föld emlékszik az ősi óriásokra. Most egyikük válaszolt a hívásomra!"'],
+  // Szél: Aelia saját szavai és a Vihar Császárát szólító sorok egy készletben
+  w:['„Nyíljanak meg az ég kapui! Zephyria legendája újra szabadon szárnyal!"',
+     '„A szél meghallotta a hívásomat. Most megmutatja neked valódi erejét!"',
+     '„Emelkedj a felhők fölé, és söpörd el mindazt, ami az utunkban áll!"',
+     '„Mennydörögjön az ég! A vihar legerősebb harcosa megérkezett!"',
+     '„Villámok között született, háborúkban edződött. Most ellened harcol!"',
+     '„A vihar eddig csak figyelmeztetett. Most elérkezett az ítélet!"'],
+  l:['„Az ősi ragyogás ismét alakot ölt. Hajolj meg a fény legendája előtt!"',
+     '„A hajnal első sugarából született erő most mellettem harcol."',
+     '„Még a hat birodalom születése előtt ismertem ezt a hatalmat. Most te is meglátod!"'],
+  s:['„Lépj elő az örök éjszakából, és oltsd ki az utolsó reménysugarat is!"',
+     '„A sötétség legősibb rémálma most valósággá válik."',
+     '„Ne próbálj menekülni! Amit most megidéztem, az árnyékodban is megtalál."'],
+  pl:['„Most rajtad a sor! Mutasd meg, miért vált legendává a neved!"',
+      '„Eddig tartogattam ezt az erőt. Most eldöntjük a párbajt!"',
+      '„Erre a lépésre biztosan nem számítottál!"']
+};
+async function legendCallScene(side){
+  try{
+    const key = (side==='pl') ? 'pl' : ((G&&G.aiElem)||'s');
+    const pool = SUMMON_CALL[key]||SUMMON_CALL.s;
+    const F = (side==='pl') ? {img:'p_pl',ruler:'Te',col:'#E8D9B0'} : (FAREWELL[key]||FAREWELL.s);
+    await byeSlide({key:key, img:F.img, col:F.col, who:F.ruler, win:(side==='pl'), dur:4600,
+      text: pool[Math.floor(Math.random()*pool.length)]});
+  }catch(e){}
+}
+
+/* ============================================================
+   NOIRA, az Éj Úrnője – búcsúszavak
+   Ha a Sötét Birodalom elleni párbajban megjelent, övé az utolsó szó
+   a Sötétség Ura helyett.
+============================================================ */
+const NOIRA_BYE={
+  img:'p_noira', ruler:'Noira, az Éj Úrnője', col:'#C77DFF',
+  win:['„Győztél… mégis életben maradtál a közelemben. Ki vagy te valójában?"',
+       '„A sötétség eddig mindenkit elnyelt. Téged miért nem tudott?"'],
+  lose:['„Mások sikoltva menekültek előlem. Te legalább megpróbáltál harcolni."',
+        '„A párbaj már akkor eldőlt, amikor beléptél az árnyékaim közé."']
+};
+/* A játékos külön válaszai Noirának – ilyenkor nem az általános zárómondat jön */
+const PLAYER_SAY_NOIRA={
+  win:['„A párbaj véget ért, de a megjelenésed sokkal több kérdést hagyott bennem, mint választ."',
+       '„Legyőztelek, Noira, de érzem, hogy még közel sem mutattad meg a valódi erődet."'],
+  lose:['„Ezzel az erővel szemben semmit sem tehettem. Most már értem, miért retteg tőled mind a hat birodalom."',
+        '„Legyőztél, Noira, mégsem pusztítottál el. Mondd, miért hagytál életben?"']
+};
+/* A portré külön kép; ha még nincs a helyén, a Sötétség Ura hátterét használjuk,
+   hogy a jelenet akkor se törjön el. */
+let NOIRA_IMG_OK=false;
+(function(){ try{ const t=new Image(); t.onload=()=>{NOIRA_IMG_OK=true;}; t.src=IMG['p_noira']; }catch(e){} })();
 function byePick(pool,n,first){
   if(n<=1&&first) return first;
   return pool[Math.floor(Math.random()*pool.length)];
@@ -4965,10 +5445,25 @@ async function farewellScene(elem,won){
   const n = won ? (SAVE.beat[elem]=(SAVE.beat[elem]||0)+1) : (SAVE.fell[elem]=(SAVE.fell[elem]||0)+1);
   const tot = (SAVE.wins||0)+(SAVE.losses||0);
   persist();
-  await byeSlide({key:elem,img:F.img,col:F.col,who:F.ruler,win:won,
-    text: byePick(won?F.win:F.lose, n, won?F.firstWin:F.firstLose)});
+  // Ha a Sötét Birodalom elleni párbajban megjelent Noira, ő búcsúzik a Sötétség Ura helyett
+  // csak akkor Noira búcsúzik, ha ELLENFÉLKÉNT jelent meg; a te oldaladon idézve
+  // maradnak a birodalom szokásos zárószavai
+  const vsNoira = (elem==='s' && G && G.noiraSeen==='ai');
+  if(vsNoira){
+    const N=NOIRA_BYE, np=(won?N.win:N.lose);
+    await byeSlide({key: NOIRA_IMG_OK?'noira':'s', img: NOIRA_IMG_OK?N.img:F.img,
+      col:N.col, who:N.ruler, win:won,
+      text: np[Math.floor(Math.random()*np.length)]});
+  } else {
+    await byeSlide({key:elem,img:F.img,col:F.col,who:F.ruler,win:won,
+      text: byePick(won?F.win:F.lose, n, won?F.firstWin:F.firstLose)});
+  }
+  // a játékos zárómondata: Noira ellen sajátok, egyébként az általános készlet
+  const pp = vsNoira ? (won?PLAYER_SAY_NOIRA.win:PLAYER_SAY_NOIRA.lose)
+                     : (won?PLAYER_SAY.win:PLAYER_SAY.lose);
   await byeSlide({key:'pl',img:'p_pl',col:'#E8D9B0',who:'Te',win:won,
-    text: byePick(won?PLAYER_SAY.win:PLAYER_SAY.lose, tot, won?PLAYER_SAY.firstWin:PLAYER_SAY.firstLose)});
+    text: vsNoira ? pp[Math.floor(Math.random()*pp.length)]
+                  : byePick(pp, tot, won?PLAYER_SAY.firstWin:PLAYER_SAY.firstLose)});
 }
 
 /* ============================================================
@@ -5446,7 +5941,18 @@ function renderDeckSelect(){
     sel.appendChild(o);
   });
 }
-function switchDeck(){ deckSel=+$('deck-select').value; deckWork=[...SAVE.decks[deckSel].cards]; renderDeckList(); }
+function switchDeck(){
+  deckSel=+$('deck-select').value;
+  deckWork=[...SAVE.decks[deckSel].cards];
+  // a legördülőben kiválasztott pakli egyben az aktív pakli is legyen – de csak ha érvényes,
+  // különben az ensureDecks() a párbaj indításakor a hiányos paklit töltené be
+  const ok = deckWork.length>=30 && deckWork.length<=40 && deckElems(deckWork).size<=2;
+  if(ok){ SAVE.deckIx=deckSel; SAVE.deck=[...deckWork]; }
+  persist();
+  renderDeckSelect(); renderDeckList();
+  toast(ok ? `Aktív pakli: ${SAVE.decks[deckSel].name}`
+           : 'Ez a pakli még nem érvényes (30–40 lap, legfeljebb 2 elem) – a párbajokhoz a korábbi pakli marad.');
+}
 function newDeck(){
   if(SAVE.decks.length>=8){toast('Legfeljebb 8 pakli lehet.');return;}
   SAVE.decks.push({name:(SAVE.decks.length+1)+'. pakli',cards:[]}); persist();
@@ -5744,7 +6250,8 @@ function fitTall(el,pad){
 function fitLayout(){
   fitTall(document.querySelector('#menu .inner'),18);
   fitTall(document.getElementById('hud'),0);     // parbaj: eletero/mana/gombok savja
-  document.querySelectorAll('.modal.active .box').forEach(b=>fitTall(b,24));
+  // A felugro ablakokat NEM skalazzuk: a .modal .box-nak van max-height + gorgetese.
+  // (Beskalazva a sok lapot mutato valasztok – pl. Csontsarkany – olvashatatlanra zsugorodnanak.)
 }
 window.addEventListener('resize',fitLayout);
 window.addEventListener('orientationchange',()=>setTimeout(fitLayout,300));
@@ -5800,7 +6307,7 @@ setInterval(()=>{
   if(typeof NET!=='undefined'&&NET.on){stuckTicks=0;aiStuck=0;return;}
   if(!G||G.over){stuckTicks=0;aiStuck=0;return;}
   // rekedt választók feloldása
-  if(pickResolve && !$('pick-modal').classList.contains('active')){ const r=pickResolve; pickResolve=null; r(null); }
+  if(pickResolve && !$('pick-modal').classList.contains('active')){ const r=pickResolve; pickResolve=null; pickMandatory=false; r(null); }
   if(targeting && $('target-hint').style.display==='none'){ cancelTargeting(); }
   // játékos-oldali zár
   if(G.cur==='pl'&&busy&&!targeting&&!pickResolve){
@@ -5929,16 +6436,8 @@ loadSave(); persist(); SFX.on=(SAVE.sound!==false); MUSIC.on=(SAVE.music!==false
 if(SAVE.sfxVol==null) SAVE.sfxVol=8; if(SAVE.musVol==null) SAVE.musVol=5;
 SFX.vol=SAVE.sfxVol/10; MUSIC.vol=(SAVE.musVol/10)*0.7;
 renderMenu(); updateSndBtns();
-/* alacsony kepernyon (telefon fekvo modban) a menu es a felugro ablakok beskalazasa */
+/* alacsony kepernyon (telefon fekvo modban) a fomenu es a parbaj-oldalsav beskalazasa */
 fitLayout();
-document.querySelectorAll('.modal').forEach(m=>{
-  new MutationObserver(()=>{ if(m.classList.contains('active')) fitLayout(); })
-    .observe(m,{attributes:true,attributeFilter:['class']});
-});
-new MutationObserver(ms=>{
-  for(const r of ms) for(const n of r.addedNodes)
-    if(n.nodeType===1 && n.classList && n.classList.contains('modal')){ fitLayout(); return; }
-}).observe(document.body,{childList:true});
 const musicKick=()=>{ musicStart(); applySavedFullscreen(); document.removeEventListener('pointerdown',musicKick); };
 document.addEventListener('pointerdown',musicKick);
 if(!SAVE.realm) showRealmSelect();
@@ -6230,7 +6729,7 @@ async function startNetDuel(op){
      freezeAll:0, calm:0, airShield:false, aiElem:(op.elem||'s'), lvl:1, hard:false};
   const bg=Math.random()<.5?'field1':'field2';
   $('board').style.backgroundImage=`linear-gradient(rgba(13,7,22,.42), rgba(13,7,22,.66)), url(${IMG[bg]})`;
-  for(let i=0;i<5;i++){draw('pl',true);draw('ai',true);}
+  for(let i=0;i<5;i++){await draw('pl',true);await draw('ai',true);}
   $('log').innerHTML=''; selectedAttacker=null; targeting=null; busy=true;
   showScreen('duel'); try{musicStart();}catch(e){}
   const starter=Math.random()<.5?'pl':'ai';
