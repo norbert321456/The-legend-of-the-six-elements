@@ -33,11 +33,6 @@ android {
         }
     }
 
-    androidResources {
-        // a jpg/mp3 mar tomoritett – az ujratomorites csak lassitana
-        noCompress.addAll(['jpg', 'jpeg', 'png', 'mp3', 'ogg'])
-    }
-
     buildTypes {
         debug {
             // sideload APK: nincs kodzsugoritas, gyors build
@@ -55,9 +50,19 @@ android {
     }
 }
 
+// A Gradle 8 hibat dob, ha egy task olyan konyvtarat olvas, amit egy masik task
+// allit elo, es nincs kozottuk kimondott fuggoseg. Ezert mindkettot bekotjuk.
 tasks.named('preBuild').configure { dependsOn 'copyWebAssets' }
+tasks.matching { it.name.startsWith('merge') && it.name.endsWith('Assets') }
+     .configureEach { dependsOn 'copyWebAssets' }
 
 dependencies {
+    /*  A Kotlin 1.8 ota a kotlin-stdlib-jdk7/jdk8 osztalyai beolvadtak a fo
+        kotlin-stdlib-be. Ha egy fuggoseg a regi (1.6.21) jdk7/jdk8 modult hozza,
+        egy masik pedig az uj stdlib-et, a build "Duplicate class" hibaval elszall.
+        A BOM egy verziora igazitja mindharmat.  */
+    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.22')
+
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.webkit:webkit:1.11.0'
     implementation 'androidx.core:core:1.13.1'
