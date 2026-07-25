@@ -1,0 +1,58 @@
+name: Android APK keszitese
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Forras letoltese
+        uses: actions/checkout@v4
+
+      - name: Java 17 beallitasa
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK beallitasa
+        uses: android-actions/setup-android@v3
+
+      - name: SDK csomagok telepitese
+        run: sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Gradle beallitasa
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: APK buildelese
+        working-directory: android
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - name: APK atnevezese
+        run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/debug/app-debug.apk \
+             "out/Legend-of-the-Six-Elements.apk"
+          ls -lh out/
+
+      - name: APK feltoltese (Artifacts)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Legend-of-the-Six-Elements-APK
+          path: out/*.apk
+          if-no-files-found: error
+
+      - name: Csatolas a kiadasokhoz (csak v* tag eseten)
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: out/*.apk

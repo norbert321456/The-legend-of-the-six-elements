@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+}
+
+/*  A jatek forrasa (game.html + assets/) a repo gyokereben marad – nem duplikaljuk.
+    Build elott ide masoljuk: app/build/generated/webassets/www/  ->  APK: assets/www/  */
+def webAssetsDir = new File(layout.buildDirectory.get().asFile, "generated/webassets")
+
+tasks.register('copyWebAssets', Copy) {
+    description = 'A game.html es az assets/ mappa bemasolasa az APK-ba'
+    from(rootProject.file("..")) {
+        include 'game.html'
+        include 'assets/**'
+    }
+    into new File(webAssetsDir, "www")
+}
+
+android {
+    namespace 'hu.legendofthesixelements.game'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "hu.legendofthesixelements.game"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "2.2.0"
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += [webAssetsDir]
+        }
+    }
+
+    androidResources {
+        // a jpg/mp3 mar tomoritett – az ujratomorites csak lassitana
+        noCompress.addAll(['jpg', 'jpeg', 'png', 'mp3', 'ogg'])
+    }
+
+    buildTypes {
+        debug {
+            // sideload APK: nincs kodzsugoritas, gyors build
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+tasks.named('preBuild').configure { dependsOn 'copyWebAssets' }
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.webkit:webkit:1.11.0'
+    implementation 'androidx.core:core:1.13.1'
+}
