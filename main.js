@@ -1,4 +1,4 @@
-// Legend of the Six Elements – Electron indító
+// The Legend of the Six Elements – Electron indító
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
@@ -13,7 +13,7 @@ function createWindow () {
     minHeight: 700,
     autoHideMenuBar: true,
     backgroundColor: '#0D0716',
-    title: 'Legend of the Six Elements',
+    title: 'The Legend of the Six Elements',
     icon: path.join(__dirname, 'icon.ico'),
     webPreferences: { contextIsolation: true }
   });

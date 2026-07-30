@@ -13,7 +13,7 @@ Nem kell semmit telepítened a gépedre. A GitHub Actions építi:
 1. Töltsd fel a változásokat (`git push`).
 2. GitHub → **Actions** fül → *Android APK keszitese* workflow.
 3. Amikor lefutott (kb. 3–5 perc), az oldal alján az **Artifacts** résznél
-   töltsd le a `Legend-of-the-Six-Elements-APK` fájlt.
+   töltsd le a `The-Legend-of-the-Six-Elements-APK` fájlt.
 4. Csomagold ki, másold a telefonra, és nyisd meg a fájlkezelőből.
    Az Android rá fog kérdezni, hogy engedélyezed-e az ismeretlen forrásból
    való telepítést – ez normális sideload esetén.

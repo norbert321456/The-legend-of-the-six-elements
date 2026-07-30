@@ -1,4 +1,4 @@
-# Legend of the Six Elements – Online relay szerver
+# The Legend of the Six Elements – Online relay szerver
 
 Nulla függőségű WebSocket szerver az online (játékos vs játékos) párbajhoz.
 

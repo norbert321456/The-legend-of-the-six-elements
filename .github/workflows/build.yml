@@ -30,7 +30,7 @@ jobs:
       - name: Telepito feltoltese (Artifacts)
         uses: actions/upload-artifact@v4
         with:
-          name: Legend-of-the-Six-Elements-Setup
+          name: The-Legend-of-the-Six-Elements-Setup
           path: dist/*.exe
 
       - name: Csatolas a kiadasokhoz (csak v* tag eseten)

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" id="vp">
-<title>Legend of the Six Elements</title>
+<title>The Legend of the Six Elements</title>
 <script>
 /* ============================================================
    MOBIL / ANDROID – az asztali elrendezes aranyos kicsinyitese
@@ -75,7 +75,8 @@ html.touch #fs-btn{display:none}          /* az appban amugy is teljes kepernyo 
 #menu .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35;filter:saturate(1.1)}
 #menu .veil{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 20%,var(--void) 90%)}
 #menu .inner{position:relative;text-align:center;animation:fadeUp 1s ease both}
-#menu h1{font-size:52px;letter-spacing:8px;color:var(--gold2);text-shadow:0 0 30px rgba(201,162,39,.5);text-transform:uppercase}
+#menu h1{font-size:clamp(26px,4.6vw,52px);letter-spacing:.16em;color:var(--gold2);
+  text-shadow:0 0 30px rgba(201,162,39,.5);text-transform:uppercase}
 #menu .tag{font-style:italic;color:var(--dim);margin:8px 0 40px;letter-spacing:2px}
 #menu .btn{display:block;width:340px;margin:14px auto}
 #crystals-menu{margin-top:30px;color:var(--glow2);font-size:15px;letter-spacing:1px}
@@ -920,7 +921,7 @@ body.noflash .leg-flash,body.noflash .rays,body.noflash .myth-ring{display:none}
 <div id="menu" class="screen active">
   <div class="bg" id="menu-bg"></div><div class="veil"></div>
   <div class="inner">
-    <h1>Legend of the<br>Six Elements</h1>
+    <h1>The Legend of<br>the Six Elements</h1>
     <div class="tag">Hat elem. Hat birodalom. Egyetlen legenda.</div>
     <button class="btn" onclick="openFoePick()">⚔ &nbsp;Párbaj</button>
     <button class="btn purple" onclick="openCampaign()">🗺 &nbsp;Hadjárat (Story)</button>
@@ -1082,10 +1083,10 @@ body.noflash .leg-flash,body.noflash .rays,body.noflash .myth-ring{display:none}
   <h2>🗺 A Hat Birodalom Hadjárata</h2>
   <div id="camp-sub" style="color:var(--bone);font-size:14px;line-height:1.7;margin-bottom:8px"></div>
   <div id="camp-list"></div>
-  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0 4px">
-    <button class="btn small" id="diff-e2" onclick="setDiff(0)" style="border-color:#5C8A3A;color:#A8E094">Könnyű</button>
-    <button class="btn small" id="diff-n2" onclick="setDiff(1)">Normál</button>
-    <button class="btn small" id="diff-h2" onclick="setDiff(2)" style="border-color:#C0392B;color:#FF9C7A">💀 Nehéz</button>
+  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0 4px;flex-wrap:wrap">
+    <button class="btn small" id="diff-n2" onclick="setDiff(0)">Normál</button>
+    <button class="btn small" id="diff-h2" onclick="setDiff(1)" style="border-color:#C0392B;color:#FF9C7A">💀 Nehéz</button>
+    <button class="btn small" id="diff-l2" onclick="setDiff(2)" style="border-color:#C9A227;color:#FFE28A">👑 Legendás</button>
   </div>
   <div style="display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap">
     <button class="btn purple" id="camp-go" style="width:auto;padding:10px 26px"></button>
@@ -1095,10 +1096,10 @@ body.noflash .leg-flash,body.noflash .rays,body.noflash .myth-ring{display:none}
 
 <div class="modal" id="foe-modal"><div class="box">
   <h2>Ki ellen harcolsz?</h2>
-  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0 6px">
-    <button class="btn small" id="diff-e" onclick="setDiff(0)" style="border-color:#5C8A3A;color:#A8E094">Könnyű</button>
-    <button class="btn small" id="diff-n" onclick="setDiff(1)">Normál</button>
-    <button class="btn small" id="diff-h" onclick="setDiff(2)" style="border-color:#C0392B;color:#FF9C7A">💀 Nehéz</button>
+  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0 6px;flex-wrap:wrap">
+    <button class="btn small" id="diff-n" onclick="setDiff(0)">Normál</button>
+    <button class="btn small" id="diff-h" onclick="setDiff(1)" style="border-color:#C0392B;color:#FF9C7A">💀 Nehéz</button>
+    <button class="btn small" id="diff-l" onclick="setDiff(2)" style="border-color:#C9A227;color:#FFE28A">👑 Legendás</button>
   </div>
   <div style="display:flex;gap:14px;justify-content:center;margin:12px 0 18px;flex-wrap:wrap">
     <button class="btn purple" onclick="hide('foe-modal');startDuel('s',duelHard)">🌑 Sötét pakli</button>
@@ -1498,7 +1499,13 @@ function loadSave(){ let had=false;
     if(!SAVE.windKit){ SAVE.coll.szelroka=(SAVE.coll.szelroka||0)+2; SAVE.coll.szellomano=(SAVE.coll.szellomano||0)+2; SAVE.coll.szelkardos=(SAVE.coll.szelkardos||0)+2; SAVE.coll.viharmadar=(SAVE.coll.viharmadar||0)+2; SAVE.coll.solyomlovas=(SAVE.coll.solyomlovas||0)+2; SAVE.coll.legszellem=(SAVE.coll.legszellem||0)+1; SAVE.coll.szelmagus=(SAVE.coll.szelmagus||0)+1; SAVE.coll.harpia=(SAVE.coll.harpia||0)+1; SAVE.coll.viharfarkas=(SAVE.coll.viharfarkas||0)+1; SAVE.coll.felhogriff=(SAVE.coll.felhogriff||0)+2; SAVE.coll.mennydorgorokh=(SAVE.coll.mennydorgorokh||0)+1; SAVE.coll.szelorias=(SAVE.coll.szelorias||0)+1; SAVE.coll.szellokes=(SAVE.coll.szellokes||0)+2; SAVE.coll.viharhivas=(SAVE.coll.viharhivas||0)+1; SAVE.coll.eroshatszel=(SAVE.coll.eroshatszel||0)+1; SAVE.coll.szelekbolcsessege=(SAVE.coll.szelekbolcsessege||0)+1; SAVE.coll.szelpenge=(SAVE.coll.szelpenge||0)+1; SAVE.coll.orvenycsapda=(SAVE.coll.orvenycsapda||0)+1; SAVE.coll.legpajzs=(SAVE.coll.legpajzs||0)+1; SAVE.windKit=true; }
     if(!SAVE.earthKit){ SAVE.coll.kavicsmano=(SAVE.coll.kavicsmano||0)+2; SAVE.coll.kobogar=(SAVE.coll.kobogar||0)+2; SAVE.coll.gyokercsira=(SAVE.coll.gyokercsira||0)+2; SAVE.coll.erdoor=(SAVE.coll.erdoor||0)+2; SAVE.coll.foldvakond=(SAVE.coll.foldvakond||0)+1; SAVE.coll.sziklafarkas=(SAVE.coll.sziklafarkas||0)+2; SAVE.coll.gyokerorias=(SAVE.coll.gyokerorias||0)+1; SAVE.coll.kogolem=(SAVE.coll.kogolem||0)+2; SAVE.coll.kristalyszarvas=(SAVE.coll.kristalyszarvas||0)+1; SAVE.coll.hegyimedve=(SAVE.coll.hegyimedve||0)+1; SAVE.coll.foldmagus=(SAVE.coll.foldmagus||0)+1; SAVE.coll.granitor=(SAVE.coll.granitor||0)+1; SAVE.coll.sziklada=(SAVE.coll.sziklada||0)+2; SAVE.coll.foldrenges=(SAVE.coll.foldrenges||0)+1; SAVE.coll.gaiaaldasa=(SAVE.coll.gaiaaldasa||0)+1; SAVE.coll.kofal=(SAVE.coll.kofal||0)+1; SAVE.coll.gyokercsapda=(SAVE.coll.gyokercsapda||0)+1; SAVE.coll.sziklaomlas=(SAVE.coll.sziklaomlas||0)+1; SAVE.coll.titankalapacs=(SAVE.coll.titankalapacs||0)+1; SAVE.earthKit=true; }
   }
-  if(SAVE.lvl==null) SAVE.lvl = SAVE.hard ? 1 : 1;
+  // Régi négyfokozatú mentés átalakítása: Könnyű→Normál, Normál→Normál,
+  // Nehéz→Nehéz, Legendás→Legendás.
+  if(!SAVE.aiDiff3){
+    const oldLvl=SAVE.lvl==null?1:(SAVE.lvl|0);
+    SAVE.lvl=oldLvl<=1?0:(oldLvl===2?1:2);
+    SAVE.aiDiff3=true;
+  }
   duelHard=Math.max(0,Math.min(2,SAVE.lvl|0));
   ensureDecks();
 }
@@ -1788,12 +1795,12 @@ function effAtk(m){
 function sideOf(m){return G.pl.field.includes(m)?'pl':'ai';}
 function other(s){return s==='pl'?'ai':'pl';}
 
-let duelHard=1; // 0 = Könnyű, 1 = Normál, 2 = Nehéz
-const DIFFNAME=['KÖNNYŰ','NORMÁL','NEHÉZ'];
+let duelHard=0; // 0 = Normál, 1 = Nehéz, 2 = Legendás
+const DIFFNAME=['NORMÁL','NEHÉZ','LEGENDÁS'];
 function setDiff(h){ h=(h===true)?1:(h===false)?0:(h|0); duelHard=Math.max(0,Math.min(2,h));
-  for(const id of ['diff-e','diff-e2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===0); }
-  for(const id of ['diff-n','diff-n2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===1); }
-  for(const id of ['diff-h','diff-h2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===2); }
+  for(const id of ['diff-n','diff-n2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===0); }
+  for(const id of ['diff-h','diff-h2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===1); }
+  for(const id of ['diff-l','diff-l2']){ const e=$(id); if(e)e.classList.toggle('on',duelHard===2); }
   if(SAVE)  { SAVE.lvl=duelHard; persist(); } }
 function openFoePick(){ storyRun=false;
   if(SAVE.deck.length<30||SAVE.deck.length>40){toast('A paklidnak 30–40 laposnak kell lennie! Nyisd meg a Pakliépítőt.');return;}
@@ -2487,6 +2494,22 @@ function askTrap(side, trapId, ctx){
   });
 }
 function aiTrapUse(id, ctx){
+  if(aiLegendaryMode()){
+    const hp=G&&G.ai?G.ai.hp:30;
+    if(id==='fagycsapda')return !ctx||ctx.atk==null||ctx.atk>=4||ctx.atk>=hp;
+    if(id==='tuzcsapda'){
+      const summon=ctx&&ctx.summon, d=summon&&DB[summon];
+      return !ctx||ctx.mana==null||ctx.mana>=5||!!(d&&(d.leg||d.myth||AI_KEY[summon]));
+    }
+    if(id==='szivarvanypajzs'||id==='jegtukor')return !ctx||ctx.atk==null||ctx.atk>=4||ctx.atk>=hp;
+    if(id==='varazsorveny'||id==='szelforditas'){
+      const sid=ctx&&ctx.spell;
+      const must=['ozonviz','tisztitotuz','oceanharagja','gaiaharagja','vulkanharagja','halalitelete',
+                  'villamcsapas','istenitelet','kiuzetes','fenybuborek','egyutterosebbek','pokoliero'];
+      return !sid||must.includes(sid)||(DB[sid]&&(DB[sid].leg||DB[sid].myth));
+    }
+    if(id==='sziklaomlas')return !ctx||ctx.atk==null||ctx.atk>=4;
+  }
   if(id==='fagycsapda') return !ctx||ctx.atk==null||ctx.atk>=4;
   if(id==='tuzcsapda') return !ctx||ctx.mana==null||ctx.mana>=4;
   if(id==='szivarvanypajzs') return !ctx||ctx.atk==null||ctx.atk>=3;
@@ -3906,7 +3929,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       await revealCard(card.id, side==='pl'?3000:3400, side==='pl'?'Legendás felszerelést idézel!':'Az ellenfél legendás felszerelést idéz!', true); }
     const t = isHu(side)
       ? await pickTargetOnField('Válaszd ki, melyik szörnyed kapja a felszerelést!', S.field.filter(m=>!m.equip))
-      : S.field.filter(m=>!m.equip).sort((a,b)=>effAtk(b)-effAtk(a))[0];
+      : (aiLegendaryMode()?aiPickEquipTarget(card.id,S.field):S.field.filter(m=>!m.equip).sort((a,b)=>effAtk(b)-effAtk(a))[0]);
     if(!t)return false;
     removeFromHand(); t.equip=card.id;
     if(card.id==='hajnalkoronaja'){ t.sh=(t.sh||0)+10; log(`👑 A Hajnal Koronája ${DB[t.id].n}re száll: +10 Pajzs!`, side==='pl'?'me':'foe'); }
@@ -3956,7 +3979,8 @@ async function playCard(side,card){ // card: {id,u} kézben
       const n=card.id==='tuzgolyo'?4:5;
       const t = isHu(side)
         ? await pickTargetOnFieldOrFace(`${c.n}: válassz szörnyet vagy az ellenfelet (${n} sebzés)!`, targetableFoes(side), other(side))
-        : ((G.pl.hp<=n||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side)));
+        : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),n,false):
+          ((G.pl.hp<=n||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
       if(!t)return false;
       toGrave(); log(`<b>${c.n}</b> süvít!`, side==='pl'?'me':'foe');
       if(t==='face') await damagePlayer(other(side),n);
@@ -4013,7 +4037,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       if(isHu(side)){
         t=await pickFromList('Ellenátok: válaszd ki a semlegesítendő lapot!', targets.map(x=>x.down?{id:x.id,u:x.u,hidden:true}:x));
         if(t) t=targets.find(x=>x.u===t.u);
-      } else t=targets[0];
+      } else t=aiLegendaryMode()?aiPickEnemySpell(targets):targets[0];
       if(!t)return false;
       toGrave(); foe.spells.splice(foe.spells.indexOf(t),1); foe.grave.push({id:t.id,u:t.u});
       log(`<b>${c.n}</b> szertefoszlatja: ${DB[t.id].n}!`, side==='pl'?'me':'foe'); break; }
@@ -4067,6 +4091,9 @@ async function playCard(side,card){ // card: {id,u} kézben
       if(isHu(side)){
         t=await pickFromList('Villámcsapás: válaszd ki a célpontot!', targets.map(x=>x.down?{id:'csontvaz',u:x.u,back:true}:x));
         if(t) t=targets.find(x=>x.u===t.u);
+      } else if(aiLegendaryMode()){
+        const mons=targetableFoes(side), bestMon=aiPickControlTarget(mons), bestSpell=aiPickEnemySpell(foe.spells);
+        t=bestMon&&(!bestSpell||aiThreatVal(bestMon)>=({fenybuborek:14,erodokemelese:13}[bestSpell.id]||8))?bestMon:(bestSpell||bestMon);
       } else t=targetableFoes(side).length?[...targetableFoes(side)].sort((a,b)=>effAtk(b)-effAtk(a))[0]:targets[0];
       if(!t)return false;
       toGrave();
@@ -4078,7 +4105,8 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'fenyrobbanas':{
       const t = isHu(side)
         ? await pickTargetOnFieldOrFace('Fényrobbanás: válassz célpontot (szörny vagy játékos) – 4 sebzés!', targetableFoes(side), other(side))
-        : ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side)));
+        : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),4,true):
+          ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
       if(!t)return false;
       toGrave(); log(`☀ <b>${c.n}</b> fénye egyetlen pontba zárva sújt le!`, side==='pl'?'me':'foe');
       if(t==='face') await damagePlayer(other(side),4);
@@ -4089,13 +4117,13 @@ async function playCard(side,card){ // card: {id,u} kézben
       for(const t of [...foe.field]){ if(G.over)break; await damageMonster(t,3,null,true); }
       renderAll(); break; }
     case 'istenitelet':{ if(!targetableFoes(side).length)return false;
-      const t = isHu(side) ? await pickTargetOnField('Isteni Ítélet: melyik ellenséges szörnyet sújtsa le?',targetableFoes(side)) : aiPick(targetableFoes(side));
+      const t = isHu(side) ? await pickTargetOnField('Isteni Ítélet: melyik ellenséges szörnyet sújtsa le?',targetableFoes(side)) : (aiLegendaryMode()?aiPickControlTarget(targetableFoes(side)):aiPick(targetableFoes(side)));
       if(!t)return false;
       toGrave();
       log(`⚖ <b>${c.n}</b> lesújt: ${DB[t.id].n} fényben ég el!`, side==='pl'?'me':'foe');
       await killMonster(t,null); renderAll(); break; }
     case 'kiuzetes':{ if(!targetableFoes(side).length)return false;
-      const t = isHu(side) ? await pickTargetOnField('Kiűzetés: melyik szörny kerüljön a paklija aljára?',targetableFoes(side)) : aiPick(targetableFoes(side));
+      const t = isHu(side) ? await pickTargetOnField('Kiűzetés: melyik szörny kerüljön a paklija aljára?',targetableFoes(side)) : (aiLegendaryMode()?aiPickControlTarget(targetableFoes(side)):aiPick(targetableFoes(side)));
       if(!t)return false;
       toGrave();
       const os=sideOf(t), OS=G[os];
@@ -4157,7 +4185,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       if(isHu(side)){
         t=await pickFromList('Varázstörés: melyik ellenséges lapot semlegesíted?', targets.map(x=>x.down?{id:'csontvaz',u:x.u,back:true}:x));
         if(t) t=targets.find(x=>x.u===t.u);
-      } else t=targets[0];
+      } else t=aiLegendaryMode()?aiPickEnemySpell(targets):targets[0];
       if(!t)return false;
       toGrave(); foe.spells.splice(foe.spells.indexOf(t),1); foe.grave.push({id:t.id,u:t.u});
       log(`<b>${c.n}</b>: ${DB[t.id].n} fénnyé porlad.`, side==='pl'?'me':'foe');
@@ -4241,7 +4269,8 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'sziklada':{
       const t = isHu(side)
         ? await pickTargetOnFieldOrFace('Szikladárda: válassz szörnyet vagy az ellenfelet (4 sebzés)!', targetableFoes(side), other(side))
-        : ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side)));
+        : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),4,false):
+          ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
       if(!t)return false;
       toGrave(); log(`<b>${c.n}</b> süvít!`, side==='pl'?'me':'foe');
       if(t==='face') await damagePlayer(other(side),4);
@@ -4275,7 +4304,7 @@ async function playCard(side,card){ // card: {id,u} kézben
       if(isHu(side)){
         t=await pickFromList('Földelés: válaszd ki a semlegesítendő lapot!', targets.map(x=>x.down?{id:'csontvaz',u:x.u,back:true}:x));
         if(t) t=targets.find(x=>x.u===t.u);
-      } else t=targets[0];
+      } else t=aiLegendaryMode()?aiPickEnemySpell(targets):targets[0];
       if(!t)return false;
       toGrave(); foe.spells.splice(foe.spells.indexOf(t),1); foe.grave.push({id:t.id,u:t.u});
       log(`<b>${c.n}</b>: ${DB[t.id].n} ereje a földbe vezetődik!`, side==='pl'?'me':'foe'); break; }
@@ -4302,7 +4331,8 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'sotetgomb':{
       const t = isHu(side)
         ? await pickTargetOnFieldOrFace('Sötét Gömb: válassz szörnyet vagy az ellenfelet (4 sebzés)!', targetableFoes(side), other(side))
-        : ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side)));
+        : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),4,false):
+          ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
       if(!t)return false;
       toGrave(); log(`<b>${c.n}</b> zúg!`, side==='pl'?'me':'foe');
       if(t==='face') await damagePlayer(other(side),4);
@@ -4344,7 +4374,8 @@ async function playCard(side,card){ // card: {id,u} kézben
         sfx.heal(); log(`<b>${c.n}</b>: ${DB[t.id].n} 5 Életet gyógyul.`, side==='pl'?'me':'foe'); }
       break; }
     case 'jegnyil':{ if(!foe.field.length)return false;
-      const t=await pick('Jégnyíl: válassz célpontot (2 sebzés + fagyás)!',foe.field); if(!t)return false;
+      const t=isHu(side)?await pick('Jégnyíl: válassz célpontot (2 sebzés + fagyás)!',foe.field):
+        (aiLegendaryMode()?aiPickDamageTarget(targetableFoes(side),2,false):aiPick(targetableFoes(side))); if(!t)return false;
       toGrave(); log(`<b>${c.n}</b> süvít!`, side==='pl'?'me':'foe');
       await damageMonster(t,2,null);
       if(findM(t.u)&&freeze(t)){ log(`❄ ${DB[t.id].n} jéggé dermed!`); renderFields(); }
@@ -4352,7 +4383,8 @@ async function playCard(side,card){ // card: {id,u} kézben
     case 'vizsugar':{
       const t = isHu(side)
         ? await pickTargetOnFieldOrFace('Vízsugár: válassz ellenséges szörnyet vagy az ellenfelet (4 sebzés)!', targetableFoes(side), other(side))
-        : ((G.pl.hp<=4||!targetableFoes(side).length) ? 'face' : aiPick(targetableFoes(side)));
+        : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),4,false):
+          ((G.pl.hp<=4||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
       if(!t)return false;
       toGrave(); log(`<b>${c.n}</b> tör elő!`, side==='pl'?'me':'foe');
       if(t==='face') await damagePlayer(other(side),4);
@@ -4405,7 +4437,8 @@ async function playCard(side,card){ // card: {id,u} kézben
       const t=await pick('Válassz egy szörnyet a Halálos Átokhoz!',targetableFoes(side)); if(!t)return false;
       put(t); log(`<b>${c.n}</b> sújtja: ${DB[t.id].n}.`, side==='pl'?'me':'foe'); break; }
     case 'lelekcsapas':{ if(!foe.field.length)return false;
-      const t=await pick('Válassz egy szörnyet: 3 sebzés, te 3-at gyógyulsz!',targetableFoes(side)); if(!t)return false;
+      const t=isHu(side)?await pick('Válassz egy szörnyet: 3 sebzés, te 3-at gyógyulsz!',targetableFoes(side)):
+        (aiLegendaryMode()?aiPickDamageTarget(targetableFoes(side),3,false):aiPick(targetableFoes(side))); if(!t)return false;
       toGrave(); log(`<b>${c.n}</b>!`, side==='pl'?'me':'foe');
       await damageMonster(t,3,null); await healPlayer(side,3); break; }
     case 'halalitelete':{ if(!foe.field.length)return false;
@@ -4458,7 +4491,8 @@ async function playCard(side,card){ // card: {id,u} kézben
 async function onSummon(side,m){
   const S=G[side], foe=G[other(side)];
   if(m.id==='arnydemon'&&foe.field.length){
-    const t = isHu(side)? await pickTargetOnField('Árnydémon: válassz célpontot (2 sebzés)!',targetableFoes(side)) : aiPick(targetableFoes(side));
+    const t = isHu(side)? await pickTargetOnField('Árnydémon: válassz célpontot (2 sebzés)!',targetableFoes(side)) :
+      (aiLegendaryMode()?aiPickDamageTarget(targetableFoes(side),2,false):aiPick(targetableFoes(side)));
     if(t){log(`${DB.arnydemon.n} lehívási képessége: 2 sebzés.`);await damageMonster(t,2,null);}
   }
   if(m.id==='sotetsarkany'&&foe.field.length){
@@ -4612,12 +4646,14 @@ async function onSummon(side,m){
   if(m.id==='tuzmagus'){
     const t = isHu(side)
       ? await pickTargetOnFieldOrFace('Tűzmágus: válassz szörnyet vagy az ellenfelet (2 sebzés)!', targetableFoes(side), other(side))
-      : ((G.pl.hp<=2||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side)));
+      : (aiLegendaryMode()?aiPickDamageOrFace(targetableFoes(side),2,false):
+        ((G.pl.hp<=2||!targetableFoes(side).length)?'face':aiPick(targetableFoes(side))));
     if(t==='face'){ log(`${DB.tuzmagus.n} tűzcsóvája a játékost égeti: 2 sebzés!`); await damagePlayer(other(side),2); }
     else if(t){ log(`${DB.tuzmagus.n} tűzcsóvát lő: 2 sebzés.`); await damageMonster(t,2,null); }
   }
   if(m.id==='villamangolna'&&foe.field.length){
-    const t = isHu(side)? await pickTargetOnField('Villámangolna: válassz célpontot (2 sebzés)!',targetableFoes(side)) : aiPick(targetableFoes(side));
+    const t = isHu(side)? await pickTargetOnField('Villámangolna: válassz célpontot (2 sebzés)!',targetableFoes(side)) :
+      (aiLegendaryMode()?aiPickDamageTarget(targetableFoes(side),2,false):aiPick(targetableFoes(side)));
     if(t){log(`${DB.villamangolna.n} villáma lecsap: 2 sebzés.`);await damageMonster(t,2,null);}
   }
   if(m.id==='arapalybalna'){
@@ -4724,8 +4760,8 @@ function aiPick(list,any){ // AI: legerősebb / legdrágább választása
   list=(list||[]).filter(x=>x.id!=='noira');
   if(!list.length)return null;
   return [...list].sort((a,b)=>{
-    const va=a.atk!=null?effAtk(a)+a.hp:DB[a.id].mana*2;
-    const vb=b.atk!=null?effAtk(b)+b.hp:DB[b.id].mana*2;
+    const va=a.atk!=null?(aiLegendaryMode()?aiThreatVal(a):effAtk(a)+a.hp):(aiLegendaryMode()?aiCardVal(a):(DB[a.id].mana||0)*2);
+    const vb=b.atk!=null?(aiLegendaryMode()?aiThreatVal(b):effAtk(b)+b.hp):(aiLegendaryMode()?aiCardVal(b):(DB[b.id].mana||0)*2);
     return vb-va;})[0];
 }
 
@@ -4761,6 +4797,79 @@ function aiCardVal(card){
   if(d.rush) v+=2;
   return v;
 }
+function aiLegendaryMode(){ return !!(G&&(G.lvl|0)>=2); }
+function aiThreatVal(m){
+  if(!m)return -999;
+  let v=aiMonVal(m);
+  if(canAct(m))v+=effAtk(m)*0.9;
+  if(m.equip)v+=2.5;
+  if(tauntM(G[sideOf(m)].field)===m)v+=4;
+  if(['paladin','tengerorzoje','szelekurnoje','poszeidon','elsofeny','langisten','granitor','kraken'].includes(m.id))v+=6;
+  if(m.id==='liderc'&&G.ai.hp<=8)v+=4;
+  if(m.frozen||m.sealed||m.rooted||m.stilled||jailedBy(m))v-=4;
+  return v;
+}
+function aiSpellDamageNeed(m,dmg,pierce){
+  if(!m)return 999;
+  if(pierce)return m.hp;
+  if(m.sh>0)return 999; // egy találat előbb csak a Pajzsot töri le
+  let dealt=dmg;
+  if(m.id==='kristalyteknos'&&!m.shieldUsed)dealt=Math.max(0,dealt-2);
+  if(m.el==='v'&&G[sideOf(m)].field.some(x=>x!==m&&x.id==='tengerorzoje'))dealt=Math.max(0,dealt-1);
+  if(m.id==='hegyititan')dealt=Math.min(3,dealt);
+  return dealt>=m.hp?m.hp:999;
+}
+function aiPickDamageTarget(list,dmg,pierce){
+  list=(list||[]).filter(m=>m&&m.id!=='noira');
+  if(!list.length)return null;
+  const killable=list.filter(m=>aiSpellDamageNeed(m,dmg,!!pierce)!==999);
+  if(killable.length){
+    return [...killable].sort((a,b)=>
+      (aiThreatVal(b)-Math.max(0,dmg-b.hp)*0.25)-
+      (aiThreatVal(a)-Math.max(0,dmg-a.hp)*0.25))[0];
+  }
+  // Ha nincs kivégezhető célpont, a legveszélyesebb, pajzs nélküli ellenfelet készíti elő.
+  const open=list.filter(m=>pierce||!m.sh);
+  return [...(open.length?open:list)].sort((a,b)=>aiThreatVal(b)-aiThreatVal(a))[0];
+}
+function aiPickDamageOrFace(list,dmg,pierce){
+  list=(list||[]).filter(m=>m&&m.id!=='noira');
+  if(!list.length)return 'face';
+  const P=G.pl, wall=P.spells.filter(x=>x.wall>0).reduce((s,x)=>s+x.wall,0);
+  const protectedFace=P.field.some(x=>x.id==='paladin')||P.spells.some(x=>x.bubble>0);
+  if(!protectedFace&&P.hp+wall<=dmg)return 'face';
+  return aiPickDamageTarget(list,dmg,pierce);
+}
+function aiPickControlTarget(list){
+  list=(list||[]).filter(m=>m&&m.id!=='noira');
+  if(!list.length)return null;
+  return [...list].sort((a,b)=>aiThreatVal(b)-aiThreatVal(a))[0];
+}
+function aiPickEquipTarget(equipId,list){
+  list=(list||[]).filter(m=>m&&!m.equip&&m.id!=='noira');
+  if(!list.length)return null;
+  const e=DB[equipId]||{};
+  const attackGear=['solyomszarny','viharkoronaja','szelpenge','langpenge','arnyekpenge','szentkard','titankalapacs'];
+  return [...list].sort((a,b)=>{
+    const val=m=>{
+      let v=aiMonVal(m);
+      if((e.el||'s')===m.el)v+=4;
+      if(attackGear.includes(equipId)){v+=effAtk(m)*1.1;if(canAct(m))v+=3;}
+      if(equipId==='solyomszarny'||equipId==='viharkoronaja')v+=effAtk(m)*1.4;
+      if(equipId==='hajnalkoronaja'||equipId==='granitpancel'||equipId==='foldszive')v+=m.hp*0.45;
+      if(m.doom)v-=12;
+      return v;
+    };
+    return val(b)-val(a);
+  })[0];
+}
+function aiPickEnemySpell(list){
+  const KEY={fenybuborek:14,erodokemelese:13,pokolipaktum:10,arapaly:9,sotetsirko:9,
+             vulkaniero:8,szentaura:8,tengeraldasa:8,tuzpajzsa:7,perzselolangok:7,
+             kofal:7,viharoseg:7,ellenszel:7,melysegtitka:10};
+  list=list||[];
+  return [...list].sort((a,b)=>(KEY[b.id]||((b.down)?6:3))-(KEY[a.id]||((a.down)?6:3)))[0]||null;
+}
 // Pozíció-értékelés az AI szemszögéből (pozitív = az AI áll jobban)
 function aiBoardScore(){
   const A=G.ai, Pp=G.pl;
@@ -4783,32 +4892,48 @@ function aiFaceDamage(){
 function aiAttackScore(m,t){
   if(t==='face'){
     const dmg=effAtk(m);
+    const wall=G.pl.spells.filter(x=>x.wall>0).reduce((s,x)=>s+x.wall,0);
     let sc=dmg*2.2;
-    if(G.pl.hp<=dmg) sc+=500;                     // halálos csapás
+    if(G.pl.hp+wall<=dmg) sc+=500;                // halálos csapás
     if(G.pl.hp-dmg<=6) sc+=dmg*1.2;               // nyomás alatt tartás
     if(!G.pl.field.length) sc+=dmg*0.8;           // szabad az út
+    if(wall>0)sc=Math.min(dmg,wall)*1.25;          // előbb a Falat kell lebontani
+    if(G.pl.field.some(x=>x.id==='paladin')||G.pl.spells.some(x=>x.bubble>0))sc=-20;
     if(G.pl.spells.some(x=>x.id==='jegfal')&&dmg>3) sc-=(dmg-3)*2;
     if(G.pl.spells.some(x=>x.down)) sc-=2;        // lefordított csapda kockázata
     return sc;
   }
-  const pierce = (m.id==='melysegicapa');
+  const pierce = ['melysegicapa','obszidianorrszarvu','oriassas','szentpegazus'].includes(m.id);
   const dmg = effAtk(m) + (m.id==='kardhal'?2:0);
+  const wall=G.pl.spells.filter(x=>x.wall>0).reduce((s,x)=>s+x.wall,0);
+  if(wall>0)return Math.min(dmg,wall)*1.3-aiMonVal(m)*0.015;
+  if(t.id==='lyra'&&m.el==='e')return -999;
+  if(t.id==='langisten'&&m.el==='f')return -999;
+  const shielded=!pierce&&t.sh>0;
   const need = t.hp + (pierce?0:blockOf(t));
-  const kills = dmg>=need;
+  let reduced=dmg;
+  if(!pierce&&t.id==='kristalyteknos'&&!t.shieldUsed)reduced=Math.max(0,reduced-2);
+  if(!pierce&&t.el==='v'&&G.pl.field.some(x=>x!==t&&x.id==='tengerorzoje'))reduced=Math.max(0,reduced-1);
+  const survivesLethal=t.equip==='foldszive'&&!t.heartUsed||
+    (t.el==='e'&&G.pl.field.some(x=>x!==t&&x.id==='gaia'&&!x.saveUsed))||
+    (t.id==='tuzfonix'&&!t.phoenixUsed);
+  const kills = !shielded&&reduced>=need&&!survivesLethal;
   // a védő ellencsapása
   let back = effAtk(t) + (t.id==='hegyimedve'?2:0);
   const noBack = t.frozen||t.sealed||t.stilled||t.rooted||G.calm>0||G.freezeAll>0||G.airShield
-                 ||m.id==='vampir'||m.id==='viharmadar'||t.id==='szelekurnoje';
+                 ||m.id==='vampir'||m.id==='viharmadar'||t.id==='szelekurnoje'||shielded;
   if(noBack) back=0;
   const iDie = (kills? (t.id==='szelekurnoje'? back>=m.hp : back>=m.hp+blockOf(m)) : back>=m.hp+blockOf(m));
   let sc = 0;
   if(kills) sc += aiMonVal(t)*1.6;
-  else sc += Math.min(dmg,t.hp)*0.8;             // előkészítő sebzés
+  else if(shielded)sc+=Math.min(dmg,t.sh)*1.05+2; // biztonságos pajzstörés
+  else sc += Math.min(reduced,t.hp)*0.8;          // előkészítő sebzés
   if(iDie) sc -= aiMonVal(m)*1.2;
   // Szelek Úrnője elsőként sebez: ha belehalunk, a támadás létre sem jön
   if(t.id==='szelekurnoje'&&effAtk(t)>=m.hp+blockOf(m)) sc -= aiMonVal(m)*1.8;
   // Fagyboszorkány: 50% eséllyel elnyeli a támadást és megfagyaszt
   if(t.id==='fagyboszorkany'&&!t.frozen) sc = sc*0.5 - aiMonVal(m)*0.35;
+  if(dodgeChance(t)>0&&!t.frozen&&!t.sealed)sc=sc*(1-dodgeChance(t))-aiMonVal(m)*dodgeChance(t)*0.45;
   // Noira ellen sosem érdemes
   if(t.id==='noira') sc = -999;
   // ha a célpont amúgy sem tud támadni, kis prioritás
@@ -4817,22 +4942,29 @@ function aiAttackScore(m,t){
 }
 // A legjobb lehívási sorrend megkeresése (kis mélységű teljes keresés)
 function aiPlanDeploy(A){
-  const pool=A.hand.filter(c=>DB[c.id].t==='monster').slice(0,7);
+  const pool=A.hand.filter(c=>DB[c.id].t==='monster').slice(0,aiLegendaryMode()?8:7);
   const slots=Math.max(0,5-A.field.length);
   let best={sc:-1,seq:[]};
-  const walk=(rest,mana,left,seq,sc)=>{
+  const walk=(rest,mana,left,soilReady,seq,sc)=>{
     if(sc>best.sc){ best={sc,seq:[...seq]}; }
     if(!left)return;
     for(let i=0;i<rest.length;i++){
       const c=rest[i], d=DB[c.id];
       let cost=d.mana;
-      if(d.el==='e'&&!A.soilUsed&&A.spells.some(x=>x.id==='termekenytalaj')) cost=Math.max(0,cost-1);
+      const usesSoil=d.el==='e'&&soilReady;
+      if(usesSoil) cost=Math.max(0,cost-1);
       if(cost>mana)continue;
       const nr=rest.slice(0,i).concat(rest.slice(i+1));
-      walk(nr, mana-cost, left-1, seq.concat([c]), sc+aiCardVal(c));
+      let bonus=0;
+      if(c.id==='lucifer')bonus+=G.pl.field.reduce((t,m)=>t+aiMonVal(m),0)*0.35;
+      if(c.id==='magmaorias'&&G.pl.hp<=5)bonus+=500;
+      if(c.id==='tuzsarkany')bonus+=G.pl.field.length*1.5;
+      if(c.id==='granitor'||c.id==='orangyal')bonus+=A.hp<=12?7:2;
+      walk(nr,mana-cost,left-1,soilReady&&!usesSoil,seq.concat([c]),sc+aiCardVal(c)+bonus);
     }
   };
-  walk(pool, A.mana, Math.min(slots,4), [], 0);
+  const soilReady=!A.soilUsed&&A.spells.some(x=>x.id==='termekenytalaj');
+  walk(pool,A.mana,Math.min(slots,aiLegendaryMode()?5:4),soilReady,[],0);
   return best.seq;
 }
 // Nehéz fokozat: érdemes-e most elsütni ezt a varázslatot?
@@ -4841,6 +4973,30 @@ function aiSmartSpellOK(d,c,A,Pp){
   const AOE=['ozonviz','oceanharagja','tuzvihar','tisztitotuz','langcsapas','foldrenges','gaiaharagja',
              'tornado','viharhivas','csontvihar','vulkanharagja','szelcsend','melyfagyasztas'];
   const foeAtk=foes.reduce((t,m)=>t+effAtk(m),0);
+  if(aiLegendaryMode()){
+    const ownVal=A.field.reduce((s,m)=>s+aiMonVal(m),0), foeVal=foes.reduce((s,m)=>s+aiThreatVal(m),0);
+    if(c.id==='ozonviz'||c.id==='tisztitotuz'){
+      const ownSp=A.spells.reduce((s,x)=>s+(x.down?2:4),0), foeSp=Pp.spells.reduce((s,x)=>s+(x.down?3:5),0);
+      return foeVal+foeSp>ownVal+ownSp+7 || (A.hp<=10&&foeAtk>=A.hp);
+    }
+    if(c.id==='tornado')return foeVal>ownVal+6 || (A.hp<=10&&foeAtk>=A.hp);
+    if(c.id==='szelcsend'||c.id==='melyfagyasztas'){
+      const ownReady=A.field.filter(canAct).reduce((s,m)=>s+effAtk(m),0);
+      return foeAtk>=Math.max(7,ownReady+4)||foeAtk>=A.hp;
+    }
+    if(c.id==='tuzvihar'){
+      const fv=foes.filter(m=>m.el!=='f').reduce((s,m)=>s+Math.min(3,m.hp)+((m.hp<=3)?aiThreatVal(m):0),0);
+      const av=A.field.filter(m=>m.el!=='f').reduce((s,m)=>s+Math.min(3,m.hp)+((m.hp<=3)?aiMonVal(m):0),0);
+      return fv>av+4;
+    }
+    const DMG={oceanharagja:4,langcsapas:2,foldrenges:3,gaiaharagja:5,
+               viharhivas:2,csontvihar:2,vulkanharagja:5,napkitores:3};
+    if(DMG[c.id]){
+      const n=DMG[c.id], kills=foes.filter(m=>m.hp<=n).length;
+      const value=foes.reduce((s,m)=>s+Math.min(n,m.hp)+(m.hp<=n?aiThreatVal(m)*0.7:0),0);
+      return kills>=1&&foes.length>=2 || value>=11 || (foes.length>=3&&n>=2);
+    }
+  }
   // területi hatás: legalább 2 célpont, és ne a saját, erősebb táblánkat rontsuk le
   if(AOE.includes(c.id)){
     if(foes.length<2) return false;
@@ -5010,10 +5166,11 @@ async function aiTurnHard(){
   await sleep(560);
 
   const bubble  = ()=>Pp.spells.some(x=>x.bubble>0);           // Fénybuborék: sebezhetetlen játékos
-  const iceWall = ()=>Pp.spells.some(x=>x.id==='jegfal');       // Jégfal: közvetlen sebzés max 3 → óvatos
+  const iceWall = ()=>Pp.spells.some(x=>x.id==='jegfal');       // Jégfal: támadásonként legfeljebb 3
   const wallHp  = ()=>Pp.spells.filter(x=>x.wall>0).reduce((t,x)=>t+x.wall,0);
   // az összes arctámadó-erő, HA a mező szabaddá válik
-  const faceSwing = ()=>A.field.filter(m=>canAct(m)&&m.id!=='noira').reduce((t,m)=>t+effAtk(m)*maxAtk(m),0);
+  const faceSwing = ()=>A.field.filter(m=>canAct(m)&&m.id!=='noira')
+    .reduce((t,m)=>t+(iceWall()?Math.min(3,effAtk(m)):effAtk(m))*maxAtk(m),0);
   const noiraReady = ()=>A.field.find(m=>m.id==='noira'&&canAct(m));
 
   // Noira: nyílt mezőn azonnal győz
@@ -5035,19 +5192,19 @@ async function aiTurnHard(){
 
   // Van-e halálos vonal MÉG ebben a körben?
   function findLethal(){
-    if(bubble()||iceWall()) return null;
+    if(bubble()) return null;
     const foes=Pp.field, need=Pp.hp+wallHp(), burn=aiBurnFace(A);
     // (A) a mező már nyitott
     if(!foes.length){
       if(noiraReady()) return {clear:[], noira:true};
-      return (faceSwing()+burn>=need && faceSwing()>0) ? {clear:[]} : null;
+      return (faceSwing()+burn>=need && faceSwing()+burn>0) ? {clear:[]} : null;
     }
     // (B) letakarítható-e az EGÉSZ ellenséges mező, és utána elég az arcerő?
     if(!foes.every(m=>m.id!=='noira'&&!isUntargetable(m))) return null; // Noira/célozhatatlan blokkoló → nem megy
     const {cap,list}=aiClearCapacity(A);
     if(cap<foes.length) return null;
     if(noiraReady()) return {clear:list.slice(0), noira:true};
-    return (faceSwing()+burn>=need && faceSwing()>0) ? {clear:list.slice(0)} : null;
+    return (faceSwing()+burn>=need && faceSwing()+burn>0) ? {clear:list.slice(0)} : null;
   }
 
   // ---- 1) HALÁLOS CSAPÁS
@@ -5102,6 +5259,11 @@ async function aiTurnHard(){
     const pr=id=>{
       if(DB[id].sk==='csapda')return 5;
       if(DB[id].t==='equip')return 3;
+      if(aiLegendaryMode()){
+        if(['ozonviz','oceanharagja','tuzvihar','tisztitotuz','foldrenges','tornado','csontvihar','napkitores',
+            'gaiaharagja','vulkanharagja','viharhivas','langcsapas'].includes(id))return 0;
+        if(['halalitelete','villamcsapas','megnyiloszakadek','lavakitores','istenitelet','kiuzetes','lelekcsapas'].includes(id))return 1;
+      }
       if(['halalitelete','villamcsapas','megnyiloszakadek','lavakitores','istenitelet','lelekcsapas'].includes(id))return 0;
       if(['ozonviz','oceanharagja','tuzvihar','tisztitotuz','foldrenges','tornado','csontvihar','napkitores'].includes(id))return 1;
       return 2;
@@ -5274,64 +5436,9 @@ function aiWantsSpell(d,c,A,P,slot){
 
 
 async function aiTurn(){
-  if((G.lvl|0)>=2) return aiTurnHard();    // NEHÉZ – új, mélyebben tervező AI
-  if((G.lvl|0)===1) return aiTurnSmart();  // NORMÁL – a korábbi „Nehéz" tervező AI
-  // KÖNNYŰ (0) – a korábbi „Normál": erős értékelő alap-AI, véletlen hibák nélkül
-  const A=G.ai, P=G.pl;
-  await sleep(700);
-  // 1) szörnyek lehívása (drágától olcsóig)
-  let played=true;
-  while(played&&!G.over){
-    played=false;
-    const val=c=>G.hard ? (DB[c.id].atk+DB[c.id].hp)/Math.max(1,DB[c.id].mana) + DB[c.id].mana*0.15 : DB[c.id].mana;
-    const opts=A.hand.filter(c=>DB[c.id].t==='monster'&&DB[c.id].mana<=A.mana).sort((a,b)=>val(b)-val(a));
-    if(opts.length&&A.field.length<5){
-      await playCard('ai',opts[0]); played=true; await sleep(850); }
-  }
-  if(G.over)return;
-  // 2) varázslatok / felszerelés egyszerű heurisztikával
-  for(const c of [...A.hand]){
-    if(G.over)return;
-    const d=DB[c.id]; if(d.t==='monster')continue;
-    const slot=A.spells.length<5;
-    let go=aiWantsSpell(d,c,A,P,slot);
-    if(go){
-      if(d.sk!=='csapda'&&!d.leg) await revealCard(c.id, 2300, 'Az ellenfél kijátssza');
-      const ok=await playCard('ai',c);
-      if(ok)await sleep(d.sk==='csapda'?500:700);
-    }
-  }
-  if(G.over)return;
-  // 3) támadások
-  for(const m of [...A.field]){
-    if(G.over)return;
-    if(!findM(m.u)||!canAct(m))continue;
-    let target='face';
-    const foeMons=P.field.filter(x=>x.id!=='noira'&&!isUntargetable(x));
-    if(P.field.length&&!foeMons.length&&!faceAllowed(m)&&m.id!=='noira'){
-      log('Az ellenfél nem mer Noirára támadni.'); continue; }
-    const tauntMon=tauntM(P.field);
-    if(m.id==='tuzkolyok'){ target='face'; }
-    else if(m.id==='langhiena'&&G.pl.hp<=2){ target='face'; }
-    else if(tauntMon){ target=tauntMon; }
-    else if(G.hard&&foeMons.length){
-      const myA=effAtk(m);
-      // 1) ölhető célpont, ahol nem hal bele a visszatámadásba
-      const safeKills=foeMons.filter(t=>myA>=t.hp+blockOf(t)&&(t.frozen||t.sealed||effAtk(t)<m.hp));
-      const kills=foeMons.filter(t=>myA>=t.hp+blockOf(t));
-      const sortTh=(a,b)=>effAtk(b)-effAtk(a);
-      if(safeKills.length) target=safeKills.sort(sortTh)[0];
-      else if(kills.length) target=kills.sort(sortTh)[0];
-      else target=[...foeMons].sort((a,b)=>(effAtk(a)-effAtk(b))||((a.hp)-(b.hp)))[0];
-    }
-    else if(foeMons.length){
-      const kills=foeMons.filter(t=>effAtk(m)>=t.hp).sort((a,b)=>(effAtk(b)+b.hp)-(effAtk(a)+a.hp));
-      const safeKills=kills.filter(t=>effAtk(t)<m.hp);
-      target = safeKills[0]||kills[0]||[...foeMons].sort((a,b)=>effAtk(a)-a.hp-(effAtk(b)-b.hp))[0]||foeMons[0];
-    }
-    await attack(m,target); await sleep(600);
-  }
-  await sleep(400);
+  if((G.lvl|0)>=2) return aiTurnHard();    // LEGENDÁS – pontos célpontok, védelem- és kombinációszámítás
+  if((G.lvl|0)===1) return aiTurnHard();   // NEHÉZ – mélyebben tervező AI
+  return aiTurnSmart();                    // NORMÁL – tervező, értékelő AI
 }
 
 /* -------- párbaj vége -------- */
@@ -5610,10 +5717,14 @@ function byeSlide(cfg){
 }
 async function farewellScene(elem,won){
   const F=FAREWELL[elem]||FAREWELL.s;
+  // online párbaj: nem a birodalom elleni haladás, ezért nem számoljuk bele
+  const online = !!(typeof NET!=='undefined' && NET.on);
   if(!SAVE.beat)SAVE.beat={}; if(!SAVE.fell)SAVE.fell={};
-  const n = won ? (SAVE.beat[elem]=(SAVE.beat[elem]||0)+1) : (SAVE.fell[elem]=(SAVE.fell[elem]||0)+1);
-  const tot = (SAVE.wins||0)+(SAVE.losses||0);
-  persist();
+  const n = online ? 99
+                   : (won ? (SAVE.beat[elem]=(SAVE.beat[elem]||0)+1)
+                          : (SAVE.fell[elem]=(SAVE.fell[elem]||0)+1));
+  const tot = online ? 99 : (SAVE.wins||0)+(SAVE.losses||0);
+  if(!online) persist();
   // Ha a Sötét Birodalom elleni párbajban megjelent Noira, ő búcsúzik a Sötétség Ura helyett
   // csak akkor Noira búcsúzik, ha ELLENFÉLKÉNT jelent meg; a te oldaladon idézve
   // maradnak a birodalom szokásos zárószavai
@@ -5969,7 +6080,8 @@ function renderHands(){
         catch(e){ log('Hiba a lap kijátszásakor: '+(e&&e.message||e)); }
         finally{ busy=false; if(targeting)clearTargeting(); renderAll(); }
         if(!ok)toast('Ezt a lapot most nem lehet kijátszani.');
-        else if(wasSpell&&!DB[card.id].leg&&!(NET.on&&!NET.host)) revealCard(card.id, 1100); }; }
+        // csapdát SOHA nem fedünk fel: a revealCard online továbbítódik, és elárulná az ellenfélnek
+        else if(wasSpell&&DB[card.id].sk!=='csapda'&&!DB[card.id].leg&&!(NET.on&&!NET.host)) revealCard(card.id, 1100); }; }
     ph.appendChild(el);
   }
   $('ai-hand-n').textContent=G.ai.hand.length;
@@ -6355,7 +6467,7 @@ function tutStart(){
   ensureDecks();
   if(!SAVE.deck||SAVE.deck.length<30){ toast('Előbb kell egy 30–40 lapos aktív pakli.'); return; }
   TUT.on=true; TUT.i=0; TUT.ctx={};
-  startDuel(null,0);                                     // mindig KÖNNYŰ fokozaton
+  startDuel(null,0);                                     // mindig NORMÁL fokozaton
   // megvárjuk, míg a párbaj tényleg elindul (köszöntő, pénzfeldobás után)
   const w=setInterval(()=>{
     if(!TUT.on){ clearInterval(w); return; }
@@ -6938,6 +7050,28 @@ summonFx=function(el,elem){
   }
   return _summonFxNet(el,elem);
 };
+// Lyra saját idézési jelenete (nem a summonFx-en megy, ezért külön kell továbbítani)
+const _lyraFxNet=lyraSummonFx;
+lyraSummonFx=function(el){
+  if(NET.on&&NET.host&&!NET.mute){
+    try{ const u=el&&el.getAttribute&&el.getAttribute('data-u');
+      if(u){ netSyncNow(); netSend({t:'fx',k:'lyra',u}); } }catch(e){}
+  }
+  return _lyraFxNet(el);
+};
+/* A párbeszédes jeleneteket nem szövegestül küldjük át, hanem megkérjük a vendéget,
+   hogy játssza le a SAJÁT nézőpontjából – így nem fordul meg a „te / az ellenfél". */
+const _lowHpNet=lowHpScene;
+lowHpScene=async function(side){
+  if(NET.on&&NET.host&&!NET.mute) netSend({t:'fx',k:'low',s:side==='pl'?'ai':'pl'});
+  return _lowHpNet(side);
+};
+const _legendCallNet=legendCallScene;
+legendCallScene=async function(side){
+  if(NET.on&&NET.host&&!NET.mute) netSend({t:'fx',k:'legend',s:side==='pl'?'ai':'pl'});
+  return _legendCallNet(side);
+};
+
 /* ---------- vendég-oldali beavatkozók ---------- */
 const _playCardNet=playCard;
 playCard=async function(side,card){
@@ -6979,6 +7113,8 @@ finishDuel=async function(winner){
 async function netResult(won){
   if(NET.ended)return; NET.ended=true;
   if(G)G.over=true; busy=true;
+  // a búcsújelenetet mindkét fél a saját nézőpontjából játssza le
+  try{ await farewellScene((G&&G.aiElem)||'s', won); }catch(e){}
   const reward=won?150:50;
   SAVE.crystals+=reward; if(won)SAVE.wins++; else SAVE.losses++; persist(); updateCrystals();
   $('result-title').textContent=won?'Győzelem':'Vereség';
@@ -6992,6 +7128,7 @@ async function netResult(won){
   netTeardown(false);
 }
 function netTeardown(closeWs){
+  try{ clearSceneOverlays(); }catch(e){}
   NET.on=false; NET._fin=false; NET.host=false; NET.prompts={}; NET.q=[]; NET.gq=[]; NET.gqBusy=false; NET.phase='';
   if(NET.ka){clearInterval(NET.ka);NET.ka=null;}
   if(closeWs!==false){ try{NET.ws&&NET.ws.close();}catch(e){} NET.ws=null; }
@@ -7072,6 +7209,10 @@ async function netGuestHandle(d){
     else if(d.k==='fly'){ try{ const tg=(typeof d.tg==='string'&&d.tg.startsWith('F:'))?$(d.tg.slice(2)+'-hp'):d.tg; await _flyNet(d.u, tg); }catch(e){} }
     else if(d.k==='summon'){ try{ const sel=document.querySelector(`[data-u="${d.u}"]`); if(sel){ _summonFxNet(sel, d.el||'s'); await sleep(620); } }catch(e){} }
     else if(d.k==='trap'){ try{ _trapSetNet(d.s); await sleep(500); }catch(e){} }
+    else if(d.k==='lyra'){ try{ const sel=document.querySelector(`[data-u="${d.u}"]`);
+      if(sel){ _lyraFxNet(sel); await sleep(1500); } }catch(e){} }
+    else if(d.k==='low'){ try{ await _lowHpNet(d.s); }catch(e){} }
+    else if(d.k==='legend'){ try{ await _legendCallNet(d.s); }catch(e){} }
   }
   else if(d.t==='ask'){ await netOnAsk(d); }
   else if(d.t==='nak'){ toast('Ezt most nem lehet kijátszani.'); busy=(G&&G.cur!=='pl'); renderAll(); }
@@ -7157,10 +7298,23 @@ function netLobbyStatus(html,err){
   if(el){ el.innerHTML=html; el.style.color=err?'#E08585':'var(--bone)'; }
 }
 function netLobbyClose(){ const d=document.getElementById('net-lobby'); if(d)d.remove(); NET.lobby=null; }
+/* Beragadt teljes képernyős jelenetek eltakarítása.
+   Ezek z-indexe 1500–2500, a felugró ablakoké csak 100 – ha egy megszakadt
+   párbaj után ottmarad egy jelenet, letakarja a lobbit, és nem lehet
+   beírni a szobakódot. Innentől lobbinyitáskor és bontáskor is takarítunk. */
+function clearSceneOverlays(){
+  ['greet','bye','spell-reveal','trap-reveal','trap-fire','big-zoom','hand-zoom',
+   'coin-overlay','noira-cine','noira-win','tut-coach','tut-ask'].forEach(id=>{ const e=$(id); if(e)e.remove(); });
+  document.querySelectorAll('.fx-tint,.cast-fx,.sigil,.sig-mote,.ly-veil,.impact,.hit-sp,.atk-trail,.fly-clone')
+    .forEach(e=>e.remove());
+  document.body.classList.remove('targeting');
+  const th=$('target-hint'); if(th) th.style.display='none';
+}
 function openNetLobby(){
   ensureDecks();
   if(SAVE.deck.length<30||SAVE.deck.length>40){ toast('Az aktív paklidnak 30–40 laposnak kell lennie! Nyisd meg a Pakliépítőt.'); return; }
   netLobbyClose();
+  clearSceneOverlays();
   const d=document.createElement('div'); d.className='modal active'; d.id='net-lobby';
   const savedUrl=SAVE.wsUrl||'wss://the-legend-of-the-six-elements-relay-production.up.railway.app';
   d.innerHTML=`<div class="box" style="max-width:560px">
@@ -7187,6 +7341,7 @@ function openNetLobby(){
     netLobbyStatus('Kapcsolódás a szerverhez...');
     netConnect(url(),()=>netRaw({t:'join',code:c})); };
   d.querySelector('#net-cancel').onclick=()=>{ netLobbyClose(); if(NET.phase!=='duel')netTeardown(); };
+  try{ d.querySelector('#net-code').focus(); }catch(e){}
 }
 
 /* a böngészőben ártalmatlan; a fejléc-nélküli teszteknek elérhetővé teszi a DB-t */

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Six Elements</string>
+    <string name="app_name">The Legend of the Six Elements</string>
     <string name="exit_title">Kilépés</string>
     <string name="exit_msg">Biztosan kilépsz a játékból? A haladásod mentve van.</string>
     <string name="exit_yes">Kilépés</string>

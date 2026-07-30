@@ -1,5 +1,5 @@
 /* ============================================================
-   Legend of the Six Elements – Online relay szerver
+   The Legend of the Six Elements – Online relay szerver
    Nulla függőség: csak a beépített Node.js modulokat használja.
    Futtatás:  node server.js          (alapértelmezett port: 8765)
    Vagy:      PORT=1234 node server.js
@@ -22,7 +22,7 @@ function code4() {
 
 const srv = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end('Legend of the Six Elements relay – OK\nSzobák: ' + Object.keys(rooms).length);
+  res.end('The Legend of the Six Elements relay – OK\nSzobák: ' + Object.keys(rooms).length);
 });
 
 srv.on('upgrade', (req, sock) => {
